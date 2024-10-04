@@ -515,7 +515,7 @@ main {
 }
 
 .progress-text {
-  color: red;
+  color: rgb(196, 82, 82);
 }
 
 .about-text p { margin-bottom: 15px; }
