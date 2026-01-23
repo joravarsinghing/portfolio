@@ -456,6 +456,9 @@ main {
 
 .social-item .social-link:hover { color: var(--light-gray); }
 
+.social-link ion-icon{
+  font-size: 28px;   /* try 24px, 28px, 32px */
+}
 
 
 
@@ -1922,3 +1925,132 @@ textarea.form-input::-webkit-resizer { display: none; }
   
 }
 
+/* Skills section — rounded tiles that match page background */
+.skill {
+  /* local tuning vars */
+  --skill-padding: 14px;
+  --skill-radius: 12px;
+  --skill-gap: 18px;
+  --skill-icon-gap: 12px;
+  --skill-icon-max: 56px;
+  --skill-icon-min: 36px;
+  --skill-desc-color: var(--light-gray-70);
+  --skill-border-color: rgba(255,255,255,0.03);
+}
+
+/* container */
+.skill .skills-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--skill-gap);
+}
+
+/* tile: rounded and visually consistent with article/sidebar */
+.skill .skills-item {
+  padding: var(--skill-padding);
+  background: var(--eerie-black-2);        /* same tone as panels */
+  border: 1px solid var(--skill-border-color);
+  border-radius: var(--skill-radius);      /* keep rounded corners */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);    /* very subtle separation */
+  transition: box-shadow var(--transition-1), transform var(--transition-1);
+}
+
+/* subtle hover lift for tiles */
+.skill .skills-item:hover {
+  box-shadow: var(--shadow-1);
+  transform: translateY(-4px);
+}
+
+/* title wrapper scoped to skills only */
+.skill .title-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* headings inside skills only */
+.skill .title-wrapper .h5 {
+  color: var(--white-2);
+  font-weight: var(--fw-600);
+  margin: 0;
+}
+
+/* icon row */
+.skill .skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--skill-icon-gap);
+  align-items: center;
+}
+
+/* responsive icon sizing using clamp */
+.skill .skill-icon {
+  width: clamp(var(--skill-icon-min), 6.5vw, var(--skill-icon-max));
+  height: auto;
+  max-height: var(--skill-icon-max);
+  object-fit: contain;
+  display: inline-block;
+  filter: grayscale(100%) brightness(0.95) contrast(0.95);
+  transition: filter 180ms var(--transition-1), transform 180ms var(--transition-1);
+  margin: 4px 0;
+  border-radius: 6px;
+  background: transparent;
+}
+
+/* hover / focus for icons */
+.skill .skill-icon:hover,
+.skill .skill-icon:focus {
+  filter: none;
+  transform: translateY(-4px) scale(1.03);
+  outline: 2px solid rgba(245,200,60,0.06);
+  outline-offset: 4px;
+}
+
+/* short descriptor text */
+.skill .skill-desc {
+  margin-top: 10px;
+  color: var(--skill-desc-color);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+/* two-column layout on wide screens */
+@media (min-width: 900px) {
+  .skill .skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skill .skill-icon {
+    width: clamp(var(--skill-icon-min), 4.2vw, var(--skill-icon-max));
+  }
+}
+
+/* single column on narrow screens */
+@media (max-width: 520px) {
+  .skill .skills-list {
+    grid-template-columns: 1fr;
+  }
+  .skill .skill-icon {
+    width: clamp(28px, 12vw, 44px);
+  }
+
+/* Remove the outer light panel behind the tiles (the UL has content-card) */
+.skill .skills-list.content-card{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* If the template adds a glow via pseudo elements */
+.skill .skills-list.content-card::before,
+.skill .skills-list.content-card::after{
+  content: none !important;
+  display: none !important;
+}
+
+
+}

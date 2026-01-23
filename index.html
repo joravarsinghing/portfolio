@@ -730,101 +730,95 @@
 
         </section>
 
-        <section class="skill">
+<!-- HTML: place inside your page where the skills section belongs -->
+<section class="skill" id="skills">
+  <h3 class="h3 skills-title">My skills</h3>
 
-          <h3 class="h3 skills-title">My skills</h3>
+<ul class="skills-list" role="list" aria-label="Skills categories">
 
-          <ul class="skills-list content-card">
+    <!-- CAD, 3D Modelling & Simulation -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <h5 class="h5">CAD, 3D Modelling & Simulation</h5>
+      </div>
 
-            <li class="skills-item"> <!--CAD, 3D Modelling & Simulation -->
+      <div class="skill-icons" role="list" aria-label="CAD and 3D modelling tools">
+        <img class="skill-icon" src="./assets/images/fusion360.png" alt="Autodesk Fusion 360" title="Autodesk Fusion 360" loading="lazy">
+        <img class="skill-icon" src="./assets/images/autocad.png" alt="Autodesk AutoCAD" title="Autodesk AutoCAD" loading="lazy">
+        <img class="skill-icon" src="./assets/images/catia.png" alt="Catia V5" title="Catia V5" loading="lazy">
+        <img class="skill-icon" src="./assets/images/solidworks.png" alt="DS SolidWorks" title="DS SolidWorks" loading="lazy">
+        <img class="skill-icon" src="./assets/images/blender.png" alt="Blender" title="Blender" loading="lazy">
+        <!-- <img class="skill-icon" src="./assets/images/ansys.png" alt="Ansys Workbench" title="Ansys Workbench" loading="lazy"> -->
+      </div>
 
-              <div class="title-wrapper">
-                <h5 class="h5">CAD, 3D Modelling & Simulation</h5>
-                <data value="90">90%</data>
-              </div>
+      <p class="skill-desc">Daily use for mechanical design, rendering, and simulation.</p>
+    </li>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
+    <!-- Programming, IoT & Automation -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <h5 class="h5">Programming, IoT & Automation</h5>
+      </div>
 
-              <h5 class="timeline-text">• Autodesk Fusion 360 
-                • Autodesk AutoCAD
-                • Catia V5
-                • DS Solidworks
-                • Blender
-                • Gravity Sketch (Virtual Reality)
-                • Ansys Workbench
-              </h5>
+      <div class="skill-icons" role="list" aria-label="Programming and IoT tools">
+        <img class="skill-icon" src="./assets/images/matlab.png" alt="MATLAB & Simulink" title="MATLAB & Simulink" loading="lazy">
+        <img class="skill-icon" src="./assets/images/python.png" alt="Python 3" title="Python 3" loading="lazy">
+        <img class="skill-icon" src="./assets/images/ros.png" alt="Robot Operating System" title="Robot Operating System" loading="lazy">
+        <img class="skill-icon" src="./assets/images/node-red.png" alt="Node-RED" title="Node-RED" loading="lazy">
+      </div>
 
-            </li>
+      <p class="skill-desc">Used in robotics, IoT prototypes, and automation workflows.</p>
+    </li>
 
-            <li class="skills-item"> <!--Programming, IoT & Automation-->
+    <!-- System Design & Graphics -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <h5 class="h5">System Design & Graphics</h5>
+      </div>
 
-              <div class="title-wrapper">
-                <h5 class="h5">Programming, IoT & Automation</h5>
-                <data value="75">75%</data>
-              </div>
+      <div class="skill-icons" role="list" aria-label="System design and graphics tools">
+        <img class="skill-icon" src="./assets/images/plc.png" alt="Programmable Logic Controller" title="Programmable Logic Controller" loading="lazy">
+        <img class="skill-icon" src="./assets/images/circuit.png" alt="Circuit Design" title="Circuit Design" loading="lazy">
+        <img class="skill-icon" src="./assets/images/photoshop.png" alt="Adobe Photoshop" title="Adobe Photoshop" loading="lazy">
+        <img class="skill-icon" src="./assets/images/illustrator.png" alt="Adobe Photoshop" title="Adobe Illustrator" loading="lazy">
+      </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 75%;"></div>
-              </div>
+      <p class="skill-desc">System schematics, circuit design, and visual assets for presentations.</p>
+    </li>
 
-              <h5 class="timeline-text">• MATLAB & Simulink • Python 3 • Arduino IDE • Robot Operating System • Google Cloud
-              </h5>
+    <!-- Manufacturing & Fabrication -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <h5 class="h5">Manufacturing & Fabrication</h5>
+      </div>
 
-            </li>
+      <div class="skill-icons" role="list" aria-label="Manufacturing and fabrication tools">
+        <img class="skill-icon" src="./assets/images/3dprint.png" alt="Additive Manufacturing" title="Additive Manufacturing" loading="lazy">
+        <img class="skill-icon" src="./assets/images/reverse-engineering.png" alt="Reverse Engineering" title="Reverse Engineering" loading="lazy">
+        <img class="skill-icon" src="./assets/images/cnc.png" alt="CNC & CAM" title="CNC & CAM" loading="lazy">
+      </div>
 
-            <li class="skills-item"> <!--System Design & Graphics-->
+      <p class="skill-desc">Hands-on prototyping, CNC workflows, and finishing techniques.</p>
+    </li>
 
-              <div class="title-wrapper">
-                <h5 class="h5">System Design & Graphics</h5>
-                <data value="70">70%</data>
-              </div>
+    <!-- Business Skills -->
+    <li class="skills-item">
+      <div class="title-wrapper">
+        <h5 class="h5">Business Skills</h5>
+      </div>
 
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
+      <div class="skill-icons" role="list" aria-label="Business skills">
+        <img class="skill-icon" src="./assets/images/project-management.png" alt="Project Management" title="Project Management" loading="lazy">
+        <img class="skill-icon" src="./assets/images/market-research.png" alt="Market Research" title="Market Research" loading="lazy">
+        <img class="skill-icon" src="./assets/images/data.png" alt="Data Analytics" title="Data Analytics & Visualization" loading="lazy">
+      </div>
 
-              <h5 class="timeline-text">• Electropneumatic systems • Programmable Logic Controller • Flowcharts • Circuit Design • Adobe Photoshop
-              </h5>
+      <p class="skill-desc">Project planning, market analysis, and technical communication.</p>
+    </li>
 
-            </li>
+  </ul>
+</section>
 
-            <li class="skills-item"> <!-- Manufacturing & Fabrication-->
-
-              <div class="title-wrapper">
-                <h5 class="h5">Manufacturing & Fabrication</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-              <h5 class="timeline-text">• Additive Manufacturing (3D Printing) • Reverse Engineering • CNC & CAM • Soldering & Crimping
-              </h5>
-
-            </li>
-
-            <li class="skills-item"> <!-- Business Skills-->
-
-              <div class="title-wrapper">
-                <h5 class="h5">Business Skills</h5>
-                <data value="85">85%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 85%;"></div>
-              </div>
-
-              <h5 class="timeline-text">• Project Management & Planning • Market Research & Business Strategy • Technical Documentation • Data Analytics & Visualization
-              </h5>
-
-            </li>
-
-          </ul>
-
-        </section>
 
       </article>
 
@@ -1613,21 +1607,33 @@
               
           </figure>
         </section> -->
+<div class="contact-container" align="center">
+  <div class="contact-info">
+    <a href="mailto:joravarofficial@outlook.com" class="contact-link">
+      joravarofficial@outlook.com
+    </a>
+  </div>
 
-          <div class="contact-container" align="center">
-            <div class="contact-info">
-              <a href="mailto:joravarofficial@outlook.com" class="contact-link">
-                joravarofficial@outlook.com
-              </a>
-            </div>
+  <br>
 
-            <br>
-          
-            <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="joravarsingh" data-version="v1">
-              <a class="badge-base__link LI-simple-link" href="https://ae.linkedin.com/in/joravarsingh?trk=profile-badge" style="color: white;">LinkedIn</a>
-          </div>
-                                      
-          </div>
+  <!-- Badge -->
+<div class="badge-base LI-profile-badge"
+     data-locale="en_US"
+     data-size="medium"
+     data-theme="dark"
+     data-type="HORIZONTAL"
+     data-vanity="joravarsingh"
+     data-version="v1">
+  <a class="li-fallback-link badge-base__link LI-simple-link"
+     href="https://ae.linkedin.com/in/joravarsingh?trk=profile-badge">
+    View LinkedIn
+  </a>
+</div>
+              
+</div>
+
+<!-- <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script> -->
+
 
       </article>
 
