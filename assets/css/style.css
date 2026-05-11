@@ -1214,6 +1214,7 @@ main {
 }
 
 .project-viewer-media-card {
+  display: block;
   border: 1px solid var(--jet);
   border-radius: 14px;
   overflow: hidden;

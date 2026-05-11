@@ -90,7 +90,7 @@
     "media": [
       {
         "type": "video",
-        "src": "./assets/images/Projects/Keanu 3DP timelapse.mp4",
+        "src": "./assets/images/Projects/Keanu 3DP timelapse.websafe.mp4",
         "poster": "./assets/images/Projects/Keanu 3DP timelapse.png",
         "title": "3D Printing Animation"
       },
@@ -128,7 +128,7 @@
     "media": [
       {
         "type": "video",
-        "src": "./assets/images/Projects/Blender animation 420p.mp4",
+        "src": "./assets/images/Projects/Blender animation 420p.websafe.mp4",
         "poster": "./assets/images/Projects/blender animation.png",
         "title": "Blender Animation"
       },

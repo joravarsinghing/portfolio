@@ -367,45 +367,25 @@ const renderProjectMediaStack = function (project, elements) {
     return;
   }
 
-  const firstMedia = mediaList[0];
-  const firstSource = firstMedia && typeof firstMedia.src === 'string' ? firstMedia.src : '';
-  const firstPreviewSource = firstMedia && firstMedia.type === 'video'
-    ? normalizeAssetPath(firstMedia.poster || '')
-    : firstSource;
-  if (firstPreviewSource) {
-    const directFallbackImage = document.createElement('img');
-    directFallbackImage.className = 'project-viewer-direct-fallback';
-    directFallbackImage.src = firstPreviewSource;
-    directFallbackImage.alt = firstMedia.title || project.title;
-    directFallbackImage.addEventListener('error', function () {
-      directFallbackImage.replaceWith(createMediaErrorMessage('Primary media failed to load.'));
-    });
-    mediaFragment.appendChild(directFallbackImage);
-  }
-
   mediaList.forEach((mediaItem) => {
     const normalizedType = mediaItem && mediaItem.type === 'video' ? 'video' : 'image';
     const mediaSource = mediaItem && typeof mediaItem.src === 'string' ? mediaItem.src : '';
     if (!mediaSource) {
-      const missingCard = document.createElement('article');
+      const missingCard = document.createElement('div');
       missingCard.className = 'project-viewer-media-card';
       missingCard.appendChild(createMediaErrorMessage('Media source is missing for this project item.'));
       mediaFragment.appendChild(missingCard);
       return;
     }
 
-    const card = document.createElement('article');
+    const card = document.createElement('div');
     card.className = 'project-viewer-media-card';
 
     if (normalizedType === 'video') {
       const video = document.createElement('video');
       video.controls = true;
-      video.preload = 'none';
+      video.preload = 'metadata';
       video.setAttribute('playsinline', '');
-      const source = document.createElement('source');
-      source.src = mediaSource;
-      source.type = 'video/mp4';
-      video.appendChild(source);
       video.addEventListener('error', function () {
         const videoPoster = normalizeAssetPath(mediaItem.poster || '');
         if (videoPoster) {
@@ -423,23 +403,18 @@ const renderProjectMediaStack = function (project, elements) {
       if (mediaItem.poster) {
         video.poster = mediaItem.poster;
       }
+      video.src = mediaSource;
       card.appendChild(video);
     } else {
       const image = document.createElement('img');
-      image.loading = 'lazy';
+      image.loading = 'eager';
+      image.decoding = 'async';
       image.alt = mediaItem.title || project.title;
       image.addEventListener('error', function () {
         card.replaceChildren(createMediaErrorMessage('Image unavailable for this project media.'));
       });
       image.src = mediaSource;
       card.appendChild(image);
-    }
-
-    if (mediaItem.title) {
-      const caption = document.createElement('p');
-      caption.className = 'project-viewer-media-caption';
-      caption.textContent = mediaItem.title;
-      card.appendChild(caption);
     }
 
     mediaFragment.appendChild(card);
