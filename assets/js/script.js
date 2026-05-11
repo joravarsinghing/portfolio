@@ -1,159 +1,693 @@
 'use strict';
 
+const elementToggleFunc = function (elem) {
+  elem.classList.toggle('active');
+};
 
-
-// element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
-
-// sidebar variables
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-
-
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-select-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
-    }
-
+const formatDateForDatetime = function (dateText) {
+  const parsedDate = new Date(dateText);
+  if (Number.isNaN(parsedDate.getTime())) {
+    return '';
   }
 
-}
+  return parsedDate.toISOString().split('T')[0];
+};
 
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
+const projectViewerState = {
+  projects: [],
+  activeProjectIndex: 0,
+  lastTrigger: null,
+  focusableElements: [],
+  pointerStartX: null,
+  pointerStartY: null
+};
 
-for (let i = 0; i < filterBtn.length; i++) {
+const normalizeAssetPath = function (value) {
+  if (typeof value !== 'string' || value.length === 0) {
+    return value;
+  }
 
-  filterBtn[i].addEventListener("click", function () {
+  if (/^(https?:)?\/\//i.test(value) || value.startsWith('data:')) {
+    return value;
+  }
 
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
+  if (value.startsWith('./dist/')) {
+    return `./${value.slice('./dist/'.length)}`;
+  }
 
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
+  if (value.startsWith('dist/')) {
+    return value.slice('dist/'.length);
+  }
 
-  });
+  return value;
+};
 
-}
+const getProjectCover = function (project) {
+  if (project.cover) {
+    return normalizeAssetPath(project.cover);
+  }
 
-
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
+  const projectMedia = getProjectMediaList(project);
+  if (projectMedia.length > 0) {
+    const firstMedia = projectMedia[0];
+    if (firstMedia.type === 'video') {
+      return normalizeAssetPath(firstMedia.poster || project.imageSrc || '');
     }
 
+    return normalizeAssetPath(firstMedia.src || project.imageSrc || '');
+  }
+
+  return normalizeAssetPath(project.imageSrc || '');
+};
+
+const getProjectPrimaryHref = function (project) {
+  const projectMedia = getProjectMediaList(project);
+  if (projectMedia.length === 0) {
+    return normalizeAssetPath(project.href || project.imageSrc || '#');
+  }
+
+  const firstMedia = projectMedia[0];
+  if (firstMedia.type === 'video') {
+    return normalizeAssetPath(firstMedia.src || firstMedia.poster || '#');
+  }
+
+  return normalizeAssetPath(firstMedia.src || '#');
+};
+
+const getProjectMediaList = function (project) {
+  if (Array.isArray(project.media) && project.media.length > 0) {
+    return project.media.map((item) => ({
+      ...item,
+      src: normalizeAssetPath(item.src),
+      poster: normalizeAssetPath(item.poster)
+    }));
+  }
+
+  const fallbackSource = normalizeAssetPath(project.href || project.imageSrc);
+  if (!fallbackSource) {
+    return [];
+  }
+
+  const isVideo = /\.mp4($|\?)/i.test(fallbackSource);
+  if (isVideo) {
+    return [
+      {
+        type: 'video',
+        src: fallbackSource,
+        poster: normalizeAssetPath(project.cover || project.imageSrc || ''),
+        title: project.title
+      }
+    ];
+  }
+
+  return [
+    {
+      type: 'image',
+      src: fallbackSource,
+      title: project.title
+    }
+  ];
+};
+
+const renderProjects = function (projects) {
+  const projectList = document.querySelector('[data-project-list]');
+  const projectTemplate = document.querySelector('#project-item-template');
+
+  if (!projectList || !projectTemplate) {
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  projects.forEach((project, index) => {
+    const projectNode = projectTemplate.content.firstElementChild.cloneNode(true);
+    const projectLink = projectNode.querySelector('a');
+    const projectImage = projectNode.querySelector('img');
+    const projectTitle = projectNode.querySelector('.project-title');
+    const projectCategory = projectNode.querySelector('.project-category');
+
+    projectNode.dataset.category = project.category;
+    projectNode.dataset.projectId = project.id;
+    const primaryHref = getProjectPrimaryHref(project);
+    projectLink.href = primaryHref;
+    projectLink.dataset.projectId = project.id;
+    projectLink.dataset.projectIndex = String(index);
+    projectLink.dataset.title = project.dataTitle || project.title;
+    projectImage.src = getProjectCover(project);
+    projectImage.alt = project.imageAlt;
+    projectTitle.textContent = project.title;
+    projectCategory.textContent = project.displayCategory;
+
+    fragment.appendChild(projectNode);
   });
-}
 
+  projectList.replaceChildren(fragment);
+};
 
+const renderCertificates = function (certificates) {
+  const certificatesList = document.querySelector('[data-certificates-list]');
+  const certificateTemplate = document.querySelector('#certificate-item-template');
 
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
+  if (!certificatesList || !certificateTemplate) {
+    return;
+  }
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+  const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
+  certificates.forEach((certificate) => {
+    const certificateNode = certificateTemplate.content.firstElementChild.cloneNode(true);
+    const certificateLink = certificateNode.querySelector('a');
+    const certificateImage = certificateNode.querySelector('img');
+    const certificateCategory = certificateNode.querySelector('.certificates-category');
+    const certificateTime = certificateNode.querySelector('time');
+    const certificateTitle = certificateNode.querySelector('.certificates-item-title');
+    const certificateText = certificateNode.querySelector('.certificates-text');
+
+    certificateLink.href = certificate.href;
+    certificateLink.dataset.title = certificate.dataTitle;
+    certificateImage.src = certificate.imageSrc;
+    certificateImage.alt = certificate.imageAlt;
+    certificateCategory.textContent = certificate.category;
+    certificateTime.textContent = certificate.date;
+    certificateTime.dateTime = formatDateForDatetime(certificate.date);
+    certificateTitle.textContent = certificate.title;
+    certificateText.textContent = certificate.description;
+
+    fragment.appendChild(certificateNode);
+  });
+
+  certificatesList.replaceChildren(fragment);
+};
+
+const initializeDynamicSections = async function () {
+  try {
+    const [projectsResponse, certificatesResponse] = await Promise.all([
+      fetch('./data/projects.json'),
+      fetch('./data/certificates.json')
+    ]);
+
+    if (!projectsResponse.ok || !certificatesResponse.ok) {
+      throw new Error('Failed to fetch one or more data files.');
+    }
+
+    const [projects, certificates] = await Promise.all([
+      projectsResponse.json(),
+      certificatesResponse.json()
+    ]);
+
+    renderProjects(projects);
+    renderCertificates(certificates);
+    return { projects, certificates };
+  } catch (error) {
+    console.error('Dynamic content failed to load:', error);
+    return null;
+  }
+};
+
+const setupSidebarToggle = function () {
+  const sidebar = document.querySelector('[data-sidebar]');
+  const sidebarBtn = document.querySelector('[data-sidebar-btn]');
+
+  if (!sidebar || !sidebarBtn) {
+    return;
+  }
+
+  sidebarBtn.addEventListener('click', function () {
+    elementToggleFunc(sidebar);
+  });
+};
+
+const setupTestimonialsModal = function () {
+  const testimonialsItems = document.querySelectorAll('[data-testimonials-item]');
+  const modalContainer = document.querySelector('[data-modal-container]');
+  const modalCloseBtn = document.querySelector('[data-modal-close-btn]');
+  const overlay = document.querySelector('[data-overlay]');
+  const modalImg = document.querySelector('[data-modal-img]');
+  const modalTitle = document.querySelector('[data-modal-title]');
+  const modalText = document.querySelector('[data-modal-text]');
+
+  if (!modalContainer || !modalCloseBtn || !overlay || !modalImg || !modalTitle || !modalText) {
+    return;
+  }
+
+  const testimonialsModalFunc = function () {
+    modalContainer.classList.toggle('active');
+    overlay.classList.toggle('active');
+  };
+
+  testimonialsItems.forEach((item) => {
+    item.addEventListener('click', function () {
+      modalImg.src = this.querySelector('[data-testimonials-avatar]').src;
+      modalImg.alt = this.querySelector('[data-testimonials-avatar]').alt;
+      modalTitle.innerHTML = this.querySelector('[data-testimonials-title]').innerHTML;
+      modalText.innerHTML = this.querySelector('[data-testimonials-text]').innerHTML;
+      testimonialsModalFunc();
+    });
+  });
+
+  modalCloseBtn.addEventListener('click', testimonialsModalFunc);
+  overlay.addEventListener('click', testimonialsModalFunc);
+};
+
+const setupPortfolioFilter = function () {
+  const select = document.querySelector('[data-select]');
+  const selectItems = document.querySelectorAll('[data-select-item]');
+  const selectValue = document.querySelector('[data-select-value]');
+  const filterButtons = document.querySelectorAll('[data-filter-btn]');
+
+  if (!select || !selectValue || filterButtons.length === 0) {
+    return;
+  }
+
+  const filterFunc = function (selectedValue) {
+    const filterItems = document.querySelectorAll('[data-filter-item]');
+
+    filterItems.forEach((item) => {
+      if (selectedValue === 'all' || selectedValue === item.dataset.category) {
+        item.classList.add('active');
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        item.classList.remove('active');
+      }
+    });
+  };
+
+  select.addEventListener('click', function () {
+    elementToggleFunc(this);
+  });
+
+  selectItems.forEach((item) => {
+    item.addEventListener('click', function () {
+      const selectedValue = this.innerText.toLowerCase();
+      selectValue.innerText = this.innerText;
+      elementToggleFunc(select);
+      filterFunc(selectedValue);
+    });
+  });
+
+  let lastClickedBtn = filterButtons[0];
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      const selectedValue = this.innerText.toLowerCase();
+      selectValue.innerText = this.innerText;
+      filterFunc(selectedValue);
+
+      lastClickedBtn.classList.remove('active');
+      this.classList.add('active');
+      lastClickedBtn = this;
+    });
+  });
+};
+
+const getProjectViewerElements = function () {
+  return {
+    modal: document.querySelector('[data-project-modal]'),
+    dialog: document.querySelector('[data-project-modal-dialog]'),
+    backdrop: document.querySelector('[data-project-modal-backdrop]'),
+    closeButton: document.querySelector('[data-project-close]'),
+    previousButton: document.querySelector('[data-project-prev]'),
+    nextButton: document.querySelector('[data-project-next]'),
+    rail: document.querySelector('[data-project-rail]'),
+    title: document.querySelector('[data-project-viewer-title]'),
+    category: document.querySelector('[data-project-viewer-category]'),
+    mediaList: document.querySelector('[data-project-media-list]')
+  };
+};
+
+const teardownProject = function (mediaList) {
+  const videos = mediaList.querySelectorAll('video');
+  videos.forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+  });
+};
+
+const getFocusableElements = function (root) {
+  const selector = [
+    'button:not([disabled])',
+    '[href]:not([tabindex="-1"])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  return Array.from(root.querySelectorAll(selector)).filter((element) => element.offsetParent !== null);
+};
+
+const buildProjectRail = function (elements) {
+  const railFragment = document.createDocumentFragment();
+
+  projectViewerState.projects.forEach((project, index) => {
+    const railButton = document.createElement('button');
+    railButton.type = 'button';
+    railButton.className = 'project-viewer-rail-item';
+    railButton.dataset.projectRailIndex = String(index);
+    railButton.setAttribute('aria-label', `Open ${project.title}`);
+    railButton.textContent = project.title;
+    railButton.addEventListener('click', function () {
+      setActiveProject(index, elements, 'right');
+    });
+    railFragment.appendChild(railButton);
+  });
+
+  elements.rail.replaceChildren(railFragment);
+};
+
+const renderProjectMediaStack = function (project, elements) {
+  teardownProject(elements.mediaList);
+
+  const mediaFragment = document.createDocumentFragment();
+  const mediaList = getProjectMediaList(project);
+  if (!Array.isArray(mediaList) || mediaList.length === 0) {
+    const emptyState = document.createElement('p');
+    emptyState.className = 'project-viewer-media-caption';
+    emptyState.textContent = 'Media not available for this project yet.';
+    elements.mediaList.replaceChildren(emptyState);
+    elements.mediaList.scrollTop = 0;
+    return;
+  }
+
+  const firstMedia = mediaList[0];
+  const firstSource = firstMedia && typeof firstMedia.src === 'string' ? firstMedia.src : '';
+  const firstPreviewSource = firstMedia && firstMedia.type === 'video'
+    ? normalizeAssetPath(firstMedia.poster || '')
+    : firstSource;
+  if (firstPreviewSource) {
+    const directFallbackImage = document.createElement('img');
+    directFallbackImage.className = 'project-viewer-direct-fallback';
+    directFallbackImage.src = firstPreviewSource;
+    directFallbackImage.alt = firstMedia.title || project.title;
+    directFallbackImage.addEventListener('error', function () {
+      directFallbackImage.replaceWith(createMediaErrorMessage('Primary media failed to load.'));
+    });
+    mediaFragment.appendChild(directFallbackImage);
+  }
+
+  mediaList.forEach((mediaItem) => {
+    const normalizedType = mediaItem && mediaItem.type === 'video' ? 'video' : 'image';
+    const mediaSource = mediaItem && typeof mediaItem.src === 'string' ? mediaItem.src : '';
+    if (!mediaSource) {
+      const missingCard = document.createElement('article');
+      missingCard.className = 'project-viewer-media-card';
+      missingCard.appendChild(createMediaErrorMessage('Media source is missing for this project item.'));
+      mediaFragment.appendChild(missingCard);
+      return;
+    }
+
+    const card = document.createElement('article');
+    card.className = 'project-viewer-media-card';
+
+    if (normalizedType === 'video') {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.preload = 'none';
+      video.setAttribute('playsinline', '');
+      const source = document.createElement('source');
+      source.src = mediaSource;
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.addEventListener('error', function () {
+        const videoPoster = normalizeAssetPath(mediaItem.poster || '');
+        if (videoPoster) {
+          const fallbackImage = document.createElement('img');
+          fallbackImage.src = videoPoster;
+          fallbackImage.alt = mediaItem.title || project.title;
+          fallbackImage.addEventListener('error', function () {
+            card.replaceChildren(createMediaErrorMessage('Video unavailable for this project media.'));
+          });
+          card.replaceChildren(fallbackImage);
+        } else {
+          card.replaceChildren(createMediaErrorMessage('Video unavailable for this project media.'));
+        }
+      });
+      if (mediaItem.poster) {
+        video.poster = mediaItem.poster;
+      }
+      card.appendChild(video);
+    } else {
+      const image = document.createElement('img');
+      image.loading = 'lazy';
+      image.alt = mediaItem.title || project.title;
+      image.addEventListener('error', function () {
+        card.replaceChildren(createMediaErrorMessage('Image unavailable for this project media.'));
+      });
+      image.src = mediaSource;
+      card.appendChild(image);
+    }
+
+    if (mediaItem.title) {
+      const caption = document.createElement('p');
+      caption.className = 'project-viewer-media-caption';
+      caption.textContent = mediaItem.title;
+      card.appendChild(caption);
+    }
+
+    mediaFragment.appendChild(card);
+  });
+
+  if (mediaFragment.childElementCount === 0) {
+    const emptyState = document.createElement('p');
+    emptyState.className = 'project-viewer-media-caption';
+    emptyState.textContent = 'Media not available for this project yet.';
+    elements.mediaList.replaceChildren(emptyState);
+  } else {
+    elements.mediaList.replaceChildren(mediaFragment);
+  }
+  elements.mediaList.scrollTop = 0;
+};
+
+const createMediaErrorMessage = function (message) {
+  const fallback = document.createElement('p');
+  fallback.className = 'project-viewer-media-caption project-viewer-media-error';
+  fallback.textContent = message;
+  return fallback;
+};
+
+var setActiveProject = function () {};
+
+const syncActiveRail = function (elements) {
+  const railButtons = elements.rail.querySelectorAll('[data-project-rail-index]');
+
+  railButtons.forEach((button, index) => {
+    const isActive = index === projectViewerState.activeProjectIndex;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-current', isActive ? 'true' : 'false');
+    if (isActive) {
+      button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  });
+};
+
+setActiveProject = function (index, elements, direction) {
+  if (projectViewerState.projects.length === 0) {
+    return;
+  }
+
+  const projectCount = projectViewerState.projects.length;
+  const normalizedIndex = (index + projectCount) % projectCount;
+  projectViewerState.activeProjectIndex = normalizedIndex;
+
+  elements.mediaList.dataset.transitionDirection = direction || 'right';
+  const project = projectViewerState.projects[normalizedIndex];
+  elements.title.textContent = project.title;
+  elements.category.textContent = project.displayCategory;
+  renderProjectMediaStack(project, elements);
+  syncActiveRail(elements);
+};
+
+const lockBackgroundScroll = function () {
+  document.body.classList.add('project-viewer-open');
+};
+
+const unlockBackgroundScroll = function () {
+  document.body.classList.remove('project-viewer-open');
+};
+
+const trapFocusInsideModal = function (event) {
+  if (event.key !== 'Tab') {
+    return;
+  }
+
+  const focusableElements = projectViewerState.focusableElements;
+  if (focusableElements.length === 0) {
+    return;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+};
+
+const setupProjectViewer = function (projects) {
+  const elements = getProjectViewerElements();
+  if (!elements.modal || !elements.dialog || !elements.closeButton || !elements.mediaList || !elements.rail) {
+    return;
+  }
+
+  projectViewerState.projects = projects;
+  buildProjectRail(elements);
+
+  const closeProjectViewer = function () {
+    if (!elements.modal.classList.contains('active')) {
+      return;
+    }
+
+    teardownProject(elements.mediaList);
+    elements.modal.classList.remove('active');
+    elements.modal.setAttribute('aria-hidden', 'true');
+    unlockBackgroundScroll();
+
+    document.removeEventListener('keydown', handleModalKeydown);
+    projectViewerState.focusableElements = [];
+
+    if (projectViewerState.lastTrigger instanceof HTMLElement) {
+      projectViewerState.lastTrigger.focus();
+    }
+  };
+
+  const openProjectViewer = function (projectIndex, triggerElement) {
+    projectViewerState.lastTrigger = triggerElement;
+    elements.modal.classList.add('active');
+    elements.modal.setAttribute('aria-hidden', 'false');
+    lockBackgroundScroll();
+
+    setActiveProject(projectIndex, elements, 'right');
+
+    projectViewerState.focusableElements = getFocusableElements(elements.dialog);
+    elements.closeButton.focus();
+    document.addEventListener('keydown', handleModalKeydown);
+  };
+
+  var handleModalKeydown = function () {};
+  handleModalKeydown = function (event) {
+    if (!elements.modal.classList.contains('active')) {
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      closeProjectViewer();
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
+      setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
+      return;
+    }
+
+    trapFocusInsideModal(event);
+  };
+
+  elements.closeButton.addEventListener('click', closeProjectViewer);
+  elements.backdrop.addEventListener('click', closeProjectViewer);
+
+  elements.previousButton.addEventListener('click', function () {
+    setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
+  });
+
+  elements.nextButton.addEventListener('click', function () {
+    setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
+  });
+
+  elements.dialog.addEventListener('pointerdown', function (event) {
+    projectViewerState.pointerStartX = event.clientX;
+    projectViewerState.pointerStartY = event.clientY;
+  });
+
+  elements.dialog.addEventListener('pointerup', function (event) {
+    if (projectViewerState.pointerStartX === null || projectViewerState.pointerStartY === null) {
+      return;
+    }
+
+    const deltaX = event.clientX - projectViewerState.pointerStartX;
+    const deltaY = event.clientY - projectViewerState.pointerStartY;
+    const horizontalThreshold = 40;
+    const verticalThreshold = 25;
+
+    if (Math.abs(deltaX) > horizontalThreshold && Math.abs(deltaY) < verticalThreshold) {
+      if (deltaX < 0) {
+        setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
+      } else {
+        setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
       }
     }
 
+    projectViewerState.pointerStartX = null;
+    projectViewerState.pointerStartY = null;
   });
-}
+
+  document.querySelectorAll('[data-project-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      const projectIndex = Number.parseInt(this.dataset.projectIndex, 10);
+      if (Number.isNaN(projectIndex)) {
+        return;
+      }
+      openProjectViewer(projectIndex, this);
+    });
+  });
+
+  elements.rail.addEventListener('keydown', function (event) {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return;
+    }
+
+    event.preventDefault();
+    if (event.key === 'ArrowLeft') {
+      setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
+    } else {
+      setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
+    }
+
+    const activeRailButton = elements.rail.querySelector(
+      `[data-project-rail-index="${projectViewerState.activeProjectIndex}"]`
+    );
+    if (activeRailButton instanceof HTMLElement) {
+      activeRailButton.focus();
+    }
+  });
+};
+
+const setupPageNavigation = function () {
+  const navigationLinks = document.querySelectorAll('[data-nav-link]');
+  const pages = document.querySelectorAll('[data-page]');
+
+  navigationLinks.forEach((link) => {
+    link.addEventListener('click', function () {
+      pages.forEach((page, index) => {
+        if (this.innerHTML.toLowerCase() === page.dataset.page) {
+          page.classList.add('active');
+          navigationLinks[index].classList.add('active');
+          window.scrollTo(0, 0);
+        } else {
+          page.classList.remove('active');
+          navigationLinks[index].classList.remove('active');
+        }
+      });
+    });
+  });
+};
+
+const initializePage = async function () {
+  const data = await initializeDynamicSections();
+  if (data && Array.isArray(data.projects)) {
+    setupProjectViewer(data.projects);
+  }
+  setupSidebarToggle();
+  setupTestimonialsModal();
+  setupPortfolioFilter();
+  setupPageNavigation();
+};
+
+initializePage();

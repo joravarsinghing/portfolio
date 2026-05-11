@@ -1,0 +1,366 @@
+[
+  {
+    "id": "selfmint-android-app",
+    "category": "code",
+    "title": "SelfMint - Android App",
+    "displayCategory": "Code",
+    "dataTitle": "SelfMint - Android App",
+    "cover": "./assets/images/Projects/SelfMint.png",
+    "imageAlt": "SelfMint Android app preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/SelfMint.png",
+        "title": "SelfMint - Android App"
+      }
+    ]
+  },
+  {
+    "id": "promptbooks",
+    "category": "code",
+    "title": "PromptBooks",
+    "displayCategory": "Code",
+    "dataTitle": "PromptBooks",
+    "cover": "./assets/images/Projects/PromptBooks.png",
+    "imageAlt": "PromptBooks project preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/PromptBooks.png",
+        "title": "PromptBooks"
+      }
+    ]
+  },
+  {
+    "id": "autonomous-self-driving-rc-car",
+    "category": "research",
+    "title": "Automonomous Self-Driving RC Car - Research Paper",
+    "displayCategory": "Research",
+    "dataTitle": "Automonomous Self-Driving RC Car - Research Paper",
+    "cover": "./assets/images/Projects/Autonomous%20Self-Driving%20RC%20Car.jpg",
+    "imageAlt": "Autonomous self-driving RC car research project",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Autonomous%20Self-Driving%20RC%20Car.jpg",
+        "title": "Autonomous Self-Driving RC Car"
+      }
+    ]
+  },
+  {
+    "id": "tripower-energy-matlab",
+    "category": "code",
+    "title": "TriPower Energy MATLAB",
+    "displayCategory": "Code",
+    "dataTitle": "TriPower Energy MATLAB",
+    "cover": "./assets/images/Projects/TriPower Energy.png",
+    "imageAlt": "TriPower Energy MATLAB preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/TriPower Energy.png",
+        "title": "TriPower Energy MATLAB"
+      }
+    ]
+  },
+  {
+    "id": "portfolio-website",
+    "category": "code",
+    "title": "Portfolio website",
+    "displayCategory": "Code",
+    "dataTitle": "Portfolio website",
+    "cover": "./assets/images/Projects/project-1.png",
+    "imageAlt": "Portfolio website screenshot",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-1.png",
+        "title": "Portfolio website"
+      }
+    ]
+  },
+  {
+    "id": "printing-animation",
+    "category": "code",
+    "title": "3D Printing Animation",
+    "displayCategory": "3D Design",
+    "dataTitle": "Blender Animation",
+    "cover": "./assets/images/Projects/Keanu 3DP timelapse.png",
+    "imageAlt": "3D printing animation preview",
+    "media": [
+      {
+        "type": "video",
+        "src": "./assets/images/Projects/Keanu 3DP timelapse.mp4",
+        "poster": "./assets/images/Projects/Keanu 3DP timelapse.png",
+        "title": "3D Printing Animation"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Keanu 3DP timelapse.png",
+        "title": "3D Printing Animation Cover"
+      }
+    ]
+  },
+  {
+    "id": "creality-print-farm",
+    "category": "hardware",
+    "title": "Creality Print farm setup & Printing",
+    "displayCategory": "Hardware",
+    "dataTitle": "Creality Print farm setup & Printing",
+    "cover": "./assets/images/Projects/project-2.jpg",
+    "imageAlt": "Creality print farm setup preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-2.jpg",
+        "title": "Creality Print farm setup & Printing"
+      }
+    ]
+  },
+  {
+    "id": "blender-animation",
+    "category": "code",
+    "title": "Blender Animation",
+    "displayCategory": "3D Design",
+    "dataTitle": "Portfolio website",
+    "cover": "./assets/images/Projects/blender animation.png",
+    "imageAlt": "Blender animation preview",
+    "media": [
+      {
+        "type": "video",
+        "src": "./assets/images/Projects/Blender animation 420p.mp4",
+        "poster": "./assets/images/Projects/blender animation.png",
+        "title": "Blender Animation"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/blender animation.png",
+        "title": "Blender Animation Cover"
+      }
+    ]
+  },
+  {
+    "id": "gesture-controlled-bricks-paper",
+    "category": "research",
+    "title": "Gesture Controlled Bricks - Research Paper",
+    "displayCategory": "Research",
+    "dataTitle": "Portfolio website",
+    "cover": "./assets/images/Projects/Gesture Control Bricks.jpg",
+    "imageAlt": "Gesture controlled bricks research preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Gesture Control Bricks.jpg",
+        "title": "Gesture Controlled Bricks - Research Paper"
+      }
+    ]
+  },
+  {
+    "id": "gesture-controlled-led-wall",
+    "category": "hardware",
+    "title": "Gesture Controlled LED Brick Wall",
+    "displayCategory": "Hardware",
+    "dataTitle": "Gesture Controlled LED Brick Wall",
+    "cover": "./assets/images/Projects/project-3.png",
+    "imageAlt": "Gesture controlled LED wall preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-3.png",
+        "title": "Gesture Controlled LED Brick Wall"
+      }
+    ]
+  },
+  {
+    "id": "ieee-emirates-robot-championship-2022",
+    "category": "hardware",
+    "title": "IEEE Emirates Robot Championship 2022",
+    "displayCategory": "Hardware",
+    "dataTitle": "Gesture Controlled LED Brick Wall",
+    "cover": "./assets/images/Projects/project-4.png",
+    "imageAlt": "IEEE Emirates Robot Championship 2022 preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-4.png",
+        "title": "IEEE Emirates Robot Championship 2022"
+      }
+    ]
+  },
+  {
+    "id": "emirates-robotics-championship",
+    "category": "hardware",
+    "title": "Emirates Robotics Championship",
+    "displayCategory": "Hardware",
+    "dataTitle": "Emirates Robotics Championship",
+    "cover": "./assets/images/Projects/project-5.jpg",
+    "imageAlt": "Emirates Robotics Championship preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-5.jpg",
+        "title": "Emirates Robotics Championship"
+      }
+    ]
+  },
+  {
+    "id": "matlab-battery-soc",
+    "category": "code",
+    "title": "MATLAB Battery SoC",
+    "displayCategory": "Code",
+    "dataTitle": "MATLAB Battery SoC",
+    "cover": "./assets/images/Projects/project-6.png",
+    "imageAlt": "MATLAB battery state of charge preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-6.png",
+        "title": "MATLAB Battery SoC"
+      }
+    ]
+  },
+  {
+    "id": "adnoc-otg-fuel-station",
+    "category": "3d design",
+    "title": "Adnoc OTG Fuel Station",
+    "displayCategory": "3D Design",
+    "dataTitle": "Adnoc OTG Fuel Station",
+    "cover": "./assets/images/Projects/project-7.jpg",
+    "imageAlt": "Adnoc OTG Fuel Station model preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-7.jpg",
+        "title": "Adnoc OTG Fuel Station"
+      }
+    ]
+  },
+  {
+    "id": "generative-design",
+    "category": "3d design",
+    "title": "Generative Design",
+    "displayCategory": "3D Design",
+    "dataTitle": "Generative Design",
+    "cover": "./assets/images/Projects/project-8.jpg",
+    "imageAlt": "Generative design project preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-8.jpg",
+        "title": "Generative Design"
+      }
+    ]
+  },
+  {
+    "id": "vaeyu-e-21",
+    "category": "3d design",
+    "title": "Vaeyu E-21",
+    "displayCategory": "3D Design",
+    "dataTitle": "Vaeyu E-21",
+    "cover": "./assets/images/Projects/project-9.jpg",
+    "imageAlt": "Vaeyu E-21 model preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-9.jpg",
+        "title": "Vaeyu E-21"
+      }
+    ]
+  },
+  {
+    "id": "carnelian-2021",
+    "category": "3d design",
+    "title": "Carnelian 2021",
+    "displayCategory": "3D Design",
+    "dataTitle": "Carnelian",
+    "cover": "./assets/images/Projects/Carnelian.jpg",
+    "imageAlt": "Carnelian project preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Carnelian.jpg",
+        "title": "Carnelian 2021"
+      }
+    ]
+  },
+  {
+    "id": "zyroes-2018",
+    "category": "3d design",
+    "title": "Zyroes 2018",
+    "displayCategory": "3D Design",
+    "dataTitle": "F360 Engine",
+    "cover": "./assets/images/Projects/Zyroes.png",
+    "imageAlt": "Zyroes engine model preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Zyroes.png",
+        "title": "Zyroes 2018"
+      }
+    ]
+  },
+  {
+    "id": "hava-2017",
+    "category": "3d design",
+    "title": "Hava 2017",
+    "displayCategory": "3D Design",
+    "dataTitle": "Hava",
+    "cover": "./assets/images/Projects/Hava.jpg",
+    "imageAlt": "Hava project preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/Hava.jpg",
+        "title": "Hava 2017"
+      }
+    ]
+  },
+  {
+    "id": "python-lane-detection",
+    "category": "code",
+    "title": "Python Lane Detection",
+    "displayCategory": "Code",
+    "dataTitle": "MATLAB Battery SoC",
+    "cover": "./assets/images/Projects/project-7.png",
+    "imageAlt": "Python lane detection preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-7.png",
+        "title": "Python Lane Detection"
+      }
+    ]
+  },
+  {
+    "id": "f360-engine",
+    "category": "3d design",
+    "title": "F360 Engine",
+    "displayCategory": "3D Design",
+    "dataTitle": "F360 Engine",
+    "cover": "./assets/images/Projects/project-10.jpg",
+    "imageAlt": "F360 engine model preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-10.jpg",
+        "title": "F360 Engine"
+      }
+    ]
+  },
+  {
+    "id": "technical-drawing",
+    "category": "3d design",
+    "title": "Technical Drawing",
+    "displayCategory": "3D Design",
+    "dataTitle": "Technical Drawing",
+    "cover": "./assets/images/Projects/project-11.jpg",
+    "imageAlt": "Technical drawing preview",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-11.jpg",
+        "title": "Technical Drawing"
+      }
+    ]
+  }
+]

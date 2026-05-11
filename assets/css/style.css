@@ -1084,6 +1084,195 @@ main {
   font-weight: var(--fw-300);
 }
 
+.project-viewer-open {
+  overflow: hidden;
+}
+
+.project-viewer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: none;
+}
+
+.project-viewer-modal.active {
+  display: block;
+}
+
+.project-viewer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.project-viewer-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(960px, calc(100% - 24px));
+  max-height: calc(100vh - 24px);
+  margin: 12px auto;
+  border-radius: 18px;
+  border: 1px solid var(--jet);
+  background: var(--eerie-black-2);
+  box-shadow: var(--shadow-5);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  border-bottom: 1px solid var(--jet);
+}
+
+.project-viewer-nav-btn,
+.project-viewer-close-btn {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 10px;
+  background: var(--onyx);
+  color: var(--white-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-viewer-close-btn {
+  margin-left: auto;
+}
+
+.project-viewer-rail {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  flex: 1;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox: hide scrollbar */
+  -ms-overflow-style: none; /* IE/Edge Legacy: hide scrollbar */
+}
+
+.project-viewer-rail::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* WebKit: hide scrollbar */
+}
+
+.project-viewer-rail-item {
+  color: var(--light-gray);
+  border: 1px solid var(--jet);
+  background: var(--onyx);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: var(--fs-7);
+  white-space: nowrap;
+}
+
+.project-viewer-rail-item.active {
+  color: var(--smoky-black);
+  background: var(--orange-yellow-crayola);
+}
+
+.project-viewer-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 16px;
+}
+
+.project-viewer-title {
+  color: var(--white-2);
+  font-size: var(--fs-2);
+  margin-bottom: 6px;
+}
+
+.project-viewer-category {
+  color: var(--light-gray-70);
+  font-size: var(--fs-6);
+  margin-bottom: 14px;
+}
+
+.project-viewer-media-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  max-height: max(180px, calc(100vh - 220px));
+  min-height: 180px;
+  display: grid;
+  gap: 14px;
+  padding-right: 4px;
+}
+
+.project-viewer-media-list[data-transition-direction="left"] .project-viewer-media-card {
+  animation: modalSlideLeft 0.22s ease;
+}
+
+.project-viewer-media-list[data-transition-direction="right"] .project-viewer-media-card {
+  animation: modalSlideRight 0.22s ease;
+}
+
+.project-viewer-media-card {
+  border: 1px solid var(--jet);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--eerie-black-1);
+  min-height: 120px;
+}
+
+.project-viewer-media-card img,
+.project-viewer-media-card video {
+  width: 100%;
+  display: block;
+  max-height: 65vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.project-viewer-media-caption {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  padding: 12px;
+  line-height: 1.5;
+}
+
+.project-viewer-media-error {
+  text-align: center;
+}
+
+.project-viewer-direct-fallback {
+  width: 100%;
+  display: block;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 14px;
+  border: 1px solid var(--jet);
+  background: #000;
+}
+
+@keyframes modalSlideLeft {
+  from {
+    transform: translateX(18px);
+    opacity: 0.65;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideRight {
+  from {
+    transform: translateX(-18px);
+    opacity: 0.65;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 
 
 
@@ -1911,6 +2100,7 @@ main {
   .skill .skill-icon {
     width: clamp(28px, 12vw, 44px);
   }
+}
 
 /* Remove the outer light panel behind the tiles (the UL has content-card) */
 .skill .skills-list.content-card{
@@ -1925,7 +2115,4 @@ main {
 .skill .skills-list.content-card::after{
   content: none !important;
   display: none !important;
-}
-
-
 }

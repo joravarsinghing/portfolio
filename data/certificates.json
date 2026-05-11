@@ -1,0 +1,102 @@
+[
+  {
+    "href": "./assets/images/certificates/Udemy Aerospace Engineering- Aircraft Fundamentals.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Udemy Aerospace Engineering- Aircraft Fundamentals.jpg",
+    "imageAlt": "Goethe A1",
+    "category": "Certificate",
+    "date": "Oct 21, 2025",
+    "title": "Aircraft Fundamentals",
+    "description": "Comprehensive introduction to aircraft design and performance, covering aerodynamics, propulsion systems, flight mechanics, and airplane classifications"
+  },
+  {
+    "href": "./assets/images/certificates/Udemy MBA in 1 Course.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Udemy MBA in 1 Course.jpg",
+    "imageAlt": "Goethe A1",
+    "category": "Certificate",
+    "date": "Feb 12, 2025",
+    "title": "Udemy MBA in One Course",
+    "description": "Comprehensive MBA course covering entrepreneurship, venture capital, financial analysis, valuation, management, and marketing"
+  },
+  {
+    "href": "./assets/images/certificates/Geothe A1.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Geothe A1.jpg",
+    "imageAlt": "Goethe A1",
+    "category": "Certificate",
+    "date": "Aug 4, 2023",
+    "title": "Goethe A1",
+    "description": "Goethe-Zertifikat A1 Start Deutsch 1 - 85%"
+  },
+  {
+    "href": "./assets/images/certificates/AEIT 2023 Best Paper Award.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/AEIT 2023 Best Paper Award.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Award",
+    "date": "May 26, 2023",
+    "title": "AEIT 2023 Best Paper Award",
+    "description": "Best Paper Award at 8th Student Research Colloquium on Advances in Engineering & Information Technology 2023"
+  },
+  {
+    "href": "./assets/images/certificates/Emirates Robotics Championship.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Emirates Robotics Championship.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Award",
+    "date": "Mar 2, 2023",
+    "title": "Emirates Robotics Championship",
+    "description": "First Place in Navigation Challenge at Emirates Robotics Championship held at RIT Dubai"
+  },
+  {
+    "href": "./assets/images/certificates/IEEE R8 Robot Championship Malta 2022.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/IEEE R8 Robot Championship Malta 2022.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Certificate",
+    "date": "Dec 4, 2022",
+    "title": "IEEE R8 Robot Championship Malta 2022",
+    "description": "Certificate of participation in IEEE Region 8 Robot Championship Malta 2022"
+  },
+  {
+    "href": "./assets/images/certificates/Schneider Electric Building Controls 1.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Schneider Electric Building Controls 1.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Certificate",
+    "date": "Mar 12, 2022",
+    "title": "Schneider Electric Building Controls I",
+    "description": "Foundational course on building controls technology, covering system fundamentals, control loops, and components."
+  },
+  {
+    "href": "./assets/images/certificates/IEEE Student Day webinar.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/IEEE Student Day webinar.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Certificate",
+    "date": "Oct 6, 2021",
+    "title": "IEEE Student Day webinar",
+    "description": "IEEE Student Day Webinar MAHE Dubai on Fusion 360"
+  },
+  {
+    "href": "./assets/images/certificates/SAE Kraftwagen Challenge 2020 winner.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/SAE Kraftwagen Challenge 2020 winner.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Award",
+    "date": "Dec 16, 2020",
+    "title": "SAE Kraftwagen Challenge 2020",
+    "description": "First Place in the Society of Automotive Engineers International Kraftwagen Challenge 2020"
+  },
+  {
+    "href": "./assets/images/certificates/CADD Centre CATIA Essential.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/CADD Centre CATIA Essential.jpg",
+    "imageAlt": "Best fonts every designer",
+    "category": "Certificate",
+    "date": "Jun 20, 2020",
+    "title": "CADD Centre CATIA Essential",
+    "description": "Certificate of completing CATIA Essentials course"
+  }
+]

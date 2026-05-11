@@ -1,0 +1,16 @@
+{
+  "name": "joravar-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio with lightweight optimization pipeline",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:quick": "node tools/build.mjs --skip-images"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "sharp": "^0.34.1",
+    "terser": "^5.39.2"
+  }
+}
