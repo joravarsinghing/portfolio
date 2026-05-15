@@ -4,22 +4,14 @@ const elementToggleFunc = function (elem) {
   elem.classList.toggle('active');
 };
 
-const formatDateForDatetime = function (dateText) {
-  const parsedDate = new Date(dateText);
-  if (Number.isNaN(parsedDate.getTime())) {
-    return '';
-  }
-
-  return parsedDate.toISOString().split('T')[0];
-};
-
 const projectViewerState = {
   projects: [],
   activeProjectIndex: 0,
   lastTrigger: null,
   focusableElements: [],
   pointerStartX: null,
-  pointerStartY: null
+  pointerStartY: null,
+  isScrolling: false
 };
 
 const normalizeAssetPath = function (value) {
@@ -154,29 +146,32 @@ const renderCertificates = function (certificates) {
 
   const fragment = document.createDocumentFragment();
 
-  certificates.forEach((certificate) => {
+  certificates.forEach((certificate, index) => {
     const certificateNode = certificateTemplate.content.firstElementChild.cloneNode(true);
     const certificateLink = certificateNode.querySelector('a');
     const certificateImage = certificateNode.querySelector('img');
-    const certificateCategory = certificateNode.querySelector('.certificates-category');
-    const certificateTime = certificateNode.querySelector('time');
-    const certificateTitle = certificateNode.querySelector('.certificates-item-title');
-    const certificateText = certificateNode.querySelector('.certificates-text');
+    const certificateTitle = certificateNode.querySelector('.project-title');
+    const certificateCategory = certificateNode.querySelector('.project-category');
 
-    certificateLink.href = certificate.href;
-    certificateLink.dataset.title = certificate.dataTitle;
-    certificateImage.src = certificate.imageSrc;
+    certificateLink.href = getProjectPrimaryHref(certificate);
+    certificateLink.dataset.certificateIndex = String(index);
+    certificateImage.src = getProjectCover(certificate);
     certificateImage.alt = certificate.imageAlt;
-    certificateCategory.textContent = certificate.category;
-    certificateTime.textContent = certificate.date;
-    certificateTime.dateTime = formatDateForDatetime(certificate.date);
     certificateTitle.textContent = certificate.title;
-    certificateText.textContent = certificate.description;
+    certificateCategory.textContent = certificate.category;
 
     fragment.appendChild(certificateNode);
   });
 
   certificatesList.replaceChildren(fragment);
+};
+
+const mapCertificatesToViewerItems = function (certificates) {
+  return certificates.map((certificate, index) => ({
+    ...certificate,
+    id: certificate.id || `certificate-${index}`,
+    displayCategory: [certificate.category, certificate.date].filter(Boolean).join(' | ')
+  }));
 };
 
 const initializeDynamicSections = async function () {
@@ -197,7 +192,7 @@ const initializeDynamicSections = async function () {
 
     renderProjects(projects);
     renderCertificates(certificates);
-    return { projects, certificates };
+    return { projects, certificates: mapCertificatesToViewerItems(certificates) };
   } catch (error) {
     console.error('Dynamic content failed to load:', error);
     return null;
@@ -438,7 +433,7 @@ const createMediaErrorMessage = function (message) {
   return fallback;
 };
 
-var setActiveProject = function () {};
+var setActiveProject = function () { };
 
 const syncActiveRail = function (elements) {
   const railButtons = elements.rail.querySelectorAll('[data-project-rail-index]');
@@ -500,14 +495,11 @@ const trapFocusInsideModal = function (event) {
   }
 };
 
-const setupProjectViewer = function (projects) {
+const setupProjectViewer = function (projects, certificates) {
   const elements = getProjectViewerElements();
   if (!elements.modal || !elements.dialog || !elements.closeButton || !elements.mediaList || !elements.rail) {
     return;
   }
-
-  projectViewerState.projects = projects;
-  buildProjectRail(elements);
 
   const closeProjectViewer = function () {
     if (!elements.modal.classList.contains('active')) {
@@ -527,20 +519,22 @@ const setupProjectViewer = function (projects) {
     }
   };
 
-  const openProjectViewer = function (projectIndex, triggerElement) {
+  const openProjectViewer = function (items, itemIndex, triggerElement) {
+    projectViewerState.projects = items;
     projectViewerState.lastTrigger = triggerElement;
+    buildProjectRail(elements);
     elements.modal.classList.add('active');
     elements.modal.setAttribute('aria-hidden', 'false');
     lockBackgroundScroll();
 
-    setActiveProject(projectIndex, elements, 'right');
+    setActiveProject(itemIndex, elements, 'right');
 
     projectViewerState.focusableElements = getFocusableElements(elements.dialog);
     elements.closeButton.focus();
     document.addEventListener('keydown', handleModalKeydown);
   };
 
-  var handleModalKeydown = function () {};
+  var handleModalKeydown = function () { };
   handleModalKeydown = function (event) {
     if (!elements.modal.classList.contains('active')) {
       return;
@@ -576,8 +570,22 @@ const setupProjectViewer = function (projects) {
   });
 
   elements.dialog.addEventListener('pointerdown', function (event) {
+    // Only handle touch pointers for swipe detection
+    if (event.pointerType !== 'touch') {
+      return;
+    }
+    // Record start positions
     projectViewerState.pointerStartX = event.clientX;
     projectViewerState.pointerStartY = event.clientY;
+    // Reset scrolling flag
+    projectViewerState.isScrolling = false;
+    // Detect wheel scroll during gesture
+    const wheelHandler = function () {
+      projectViewerState.isScrolling = true;
+    };
+    elements.dialog.addEventListener('wheel', wheelHandler, { once: true, passive: true });
+    // Prevent default for touch to avoid native scrolling interference
+
   });
 
   elements.dialog.addEventListener('pointerup', function (event) {
@@ -587,17 +595,29 @@ const setupProjectViewer = function (projects) {
 
     const deltaX = event.clientX - projectViewerState.pointerStartX;
     const deltaY = event.clientY - projectViewerState.pointerStartY;
-    const horizontalThreshold = 40;
-    const verticalThreshold = 25;
 
-    if (Math.abs(deltaX) > horizontalThreshold && Math.abs(deltaY) < verticalThreshold) {
-      if (deltaX < 0) {
-        setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
-      } else {
-        setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
-      }
+    const horizontalThreshold = 40;
+    const verticalThreshold = 30;
+
+    // Determine if horizontal movement is dominant enough for swipe
+    const isDominantHorizontal = Math.abs(deltaX) > horizontalThreshold && Math.abs(deltaX) > Math.abs(deltaY);
+
+    // If a wheel scroll was detected during the gesture, or vertical movement dominates, ignore swipe handling
+    if (projectViewerState.isScrolling || !isDominantHorizontal) {
+      // Reset start positions for next gesture
+      projectViewerState.pointerStartX = null;
+      projectViewerState.pointerStartY = null;
+      return;
     }
 
+    // Perform swipe navigation based on direction
+    if (deltaX < 0) {
+      setActiveProject(projectViewerState.activeProjectIndex + 1, elements, 'right');
+    } else {
+      setActiveProject(projectViewerState.activeProjectIndex - 1, elements, 'left');
+    }
+
+    // Reset start positions after handling
     projectViewerState.pointerStartX = null;
     projectViewerState.pointerStartY = null;
   });
@@ -609,7 +629,18 @@ const setupProjectViewer = function (projects) {
       if (Number.isNaN(projectIndex)) {
         return;
       }
-      openProjectViewer(projectIndex, this);
+      openProjectViewer(projects, projectIndex, this);
+    });
+  });
+
+  document.querySelectorAll('[data-certificate-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      const certificateIndex = Number.parseInt(this.dataset.certificateIndex, 10);
+      if (Number.isNaN(certificateIndex)) {
+        return;
+      }
+      openProjectViewer(certificates, certificateIndex, this);
     });
   });
 
@@ -656,8 +687,8 @@ const setupPageNavigation = function () {
 
 const initializePage = async function () {
   const data = await initializeDynamicSections();
-  if (data && Array.isArray(data.projects)) {
-    setupProjectViewer(data.projects);
+  if (data && Array.isArray(data.projects) && Array.isArray(data.certificates)) {
+    setupProjectViewer(data.projects, data.certificates);
   }
   setupSidebarToggle();
   setupTestimonialsModal();

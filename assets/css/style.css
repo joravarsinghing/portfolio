@@ -1284,83 +1284,14 @@ main {
 
 .certificates-posts { margin-bottom: 10px; }
 
-.certificates-posts-list {
+.certificates-gallery-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 
-.certificates-post-item > a {
-  position: relative;
-  background: var(--border-gradient-onyx);
-  height: 100%;
-  box-shadow: var(--shadow-4);
-  border-radius: 16px;
-  z-index: 1;
-}
-
-.certificates-post-item > a::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: var(--eerie-black-1);
-  z-index: -1;
-}
-
-.certificates-banner-box {
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.certificates-banner-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition-1);
-}
-
-.certificates-post-item > a:hover .certificates-banner-box img { transform: scale(1.1); }
-
-.certificates-content { padding: 15px; }
-
-.certificates-meta {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 10px;
-}
-
-.certificates-meta :is(.certificates-category, time) {
-  color: var(--light-gray-70);
-  font-size: var(--fs-6);
-  font-weight: var(--fw-300);
-}
-
-.certificates-meta .dot {
-  background: var(--light-gray-70);
-  width: 4px;
-  height: 4px;
-  border-radius: 4px;
-}
-
-.certificates-item-title {
-  margin-bottom: 10px;
-  line-height: 1.3;
-  transition: var(--transition-1);
-}
-
-.certificates-post-item > a:hover .certificates-item-title { color: var(--orange-yellow-crayola); }
-
-.certificates-text {
-  color: var(--light-gray);
-  font-size: var(--fs-6);
-  font-weight: var(--fw-300);
-  line-height: 1.6;
-  text-align: justify
+.certificates-gallery-list .project-item > a {
+  display: block;
 }
 
 
@@ -1388,8 +1319,7 @@ main {
    * #PORTFOLIO, certificates 
    */
 
-  .project-img,
-  .certificates-banner-box { height: auto; }
+  .project-img { height: auto; }
 
 }
 
@@ -1634,11 +1564,9 @@ main {
    * #PORTFOLIO, certificates
    */
 
-  .project-img, .certificates-banner-box { border-radius: 16px; }
+  .project-img { border-radius: 16px; }
 
-  .certificates-posts-list { gap: 30px; }
-
-  .certificates-content { padding: 25px; }
+  .certificates-gallery-list { gap: 30px; }
 
 
 
@@ -1727,7 +1655,7 @@ main {
 
   /* portfolio and certificates grid */
 
-  .project-list, .certificates-posts-list { grid-template-columns: 1fr 1fr; }
+  .project-list, .certificates-gallery-list { grid-template-columns: 1fr 1fr; }
 
 }
 
@@ -1848,7 +1776,7 @@ main {
    * certificates
    */
 
-  .certificates-banner-box { height: 230px; }
+  .certificates-gallery-list .project-img { height: 230px; }
 
 }
 

@@ -5,12 +5,22 @@
     "title": "SelfMint - Android App",
     "displayCategory": "Code",
     "dataTitle": "SelfMint - Android App",
-    "cover": "./assets/images/Projects/SelfMint.png",
+    "cover": "./assets/images/Projects/SelfMint1.png",
     "imageAlt": "SelfMint Android app preview",
     "media": [
       {
         "type": "image",
-        "src": "./assets/images/Projects/SelfMint.png",
+        "src": "./assets/images/Projects/SelfMint1.png",
+        "title": "SelfMint - Android App"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/SelfMint2.png",
+        "title": "SelfMint - Android App"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/SelfMint3.png",
         "title": "SelfMint - Android App"
       }
     ]
