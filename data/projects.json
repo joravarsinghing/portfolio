@@ -31,12 +31,22 @@
     "title": "PromptBooks",
     "displayCategory": "Code",
     "dataTitle": "PromptBooks",
-    "cover": "./assets/images/Projects/PromptBooks.png",
+    "cover": "./assets/images/Projects/PB1.png",
     "imageAlt": "PromptBooks project preview",
     "media": [
       {
         "type": "image",
-        "src": "./assets/images/Projects/PromptBooks.png",
+        "src": "./assets/images/Projects/PB1.png",
+        "title": "PromptBooks"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/PB2.png",
+        "title": "PromptBooks"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/PB3.png",
         "title": "PromptBooks"
       }
     ]
@@ -203,12 +213,22 @@
     "title": "Emirates Robotics Championship",
     "displayCategory": "Hardware",
     "dataTitle": "Emirates Robotics Championship",
-    "cover": "./assets/images/Projects/project-5.jpg",
+    "cover": "./assets/images/Projects/project-51.jpg",
     "imageAlt": "Emirates Robotics Championship preview",
     "media": [
       {
         "type": "image",
-        "src": "./assets/images/Projects/project-5.jpg",
+        "src": "./assets/images/Projects/project-53.jpg",
+        "title": "Emirates Robotics Championship"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-52.jpg",
+        "title": "Emirates Robotics Championship"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-51.jpg",
         "title": "Emirates Robotics Championship"
       }
     ]
@@ -235,12 +255,17 @@
     "title": "Adnoc OTG Fuel Station",
     "displayCategory": "3D Design",
     "dataTitle": "Adnoc OTG Fuel Station",
-    "cover": "./assets/images/Projects/project-7.jpg",
+    "cover": "./assets/images/Projects/project-71.jpg",
     "imageAlt": "Adnoc OTG Fuel Station model preview",
     "media": [
       {
         "type": "image",
-        "src": "./assets/images/Projects/project-7.jpg",
+        "src": "./assets/images/Projects/project-71.jpg",
+        "title": "Adnoc OTG Fuel Station"
+      },
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/project-72.png",
         "title": "Adnoc OTG Fuel Station"
       }
     ]
