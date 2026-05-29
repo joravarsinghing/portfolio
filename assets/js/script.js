@@ -644,6 +644,21 @@ const setupProjectViewer = function (projects, certificates) {
     });
   });
 
+  document.querySelectorAll('[data-open-project]').forEach((trigger) => {
+    trigger.addEventListener('click', function () {
+      const projectId = this.dataset.openProject;
+      const index = projects.findIndex((p) => p.id === projectId);
+      const portfolioLink = Array.from(document.querySelectorAll('[data-nav-link]'))
+        .find((el) => el.textContent.trim().toLowerCase() === 'portfolio');
+      if (index === -1) {
+        if (portfolioLink) portfolioLink.click();
+        return;
+      }
+      if (portfolioLink) portfolioLink.click();
+      openProjectViewer(projects, index, this);
+    });
+  });
+
   elements.rail.addEventListener('keydown', function (event) {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
       return;
@@ -685,6 +700,17 @@ const setupPageNavigation = function () {
   });
 };
 
+const setupHeroNav = function () {
+  document.querySelectorAll('[data-goto-page]').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const target = this.dataset.gotoPage.toLowerCase();
+      const navLink = Array.from(document.querySelectorAll('[data-nav-link]'))
+        .find(el => el.textContent.trim().toLowerCase() === target);
+      if (navLink) navLink.click();
+    });
+  });
+};
+
 const initializePage = async function () {
   const data = await initializeDynamicSections();
   if (data && Array.isArray(data.projects) && Array.isArray(data.certificates)) {
@@ -694,6 +720,7 @@ const initializePage = async function () {
   setupTestimonialsModal();
   setupPortfolioFilter();
   setupPageNavigation();
+  setupHeroNav();
 };
 
 initializePage();

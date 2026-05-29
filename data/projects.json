@@ -54,9 +54,9 @@
   {
     "id": "autonomous-self-driving-rc-car",
     "category": "research",
-    "title": "Automonomous Self-Driving RC Car - Research Paper",
+    "title": "Autonomous Self-Driving RC Car - Research Paper",
     "displayCategory": "Research",
-    "dataTitle": "Automonomous Self-Driving RC Car - Research Paper",
+    "dataTitle": "Autonomous Self-Driving RC Car - Research Paper",
     "cover": "./assets/images/Projects/Autonomous%20Self-Driving%20RC%20Car.jpg",
     "imageAlt": "Autonomous self-driving RC car research project",
     "media": [

@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir \"C:\\\\Users\\\\jvsin\\\\Documents\\\\GitHub\\\\portfolio\")"
+      "Bash(dir \"C:\\\\Users\\\\jvsin\\\\Documents\\\\GitHub\\\\portfolio\")",
+      "Bash(python -m http.server 9876 --bind 127.0.0.1)",
+      "WebFetch(domain:127.0.0.1)",
+      "Bash(Read *)",
+      "Bash(node *)",
+      "Bash(python -m http.server 8765)"
     ]
   }
 }
