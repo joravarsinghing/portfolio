@@ -82,7 +82,9 @@
    */
 
   /* font-family */
-  --ff-poppins: 'Poppins', sans-serif;
+  --ff-main: "Geist", system-ui, sans-serif;
+  --ff-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ff-poppins: var(--ff-main);
 
   /* font-size */
   --fs-1: 24px;
@@ -167,9 +169,34 @@ input, textarea {
 
 :focus { outline-color: var(--accent-primary); }
 
-html { font-family: var(--ff-poppins); }
+html { font-family: var(--ff-main); }
 
-body { background: var(--bg-main); }
+body { 
+  background: var(--bg-main); 
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ff-main);
+  letter-spacing: -0.025em;
+}
+
+p { line-height: 1.6; }
+
+.navbar-link,
+.info-content .title,
+.about-hero-eyebrow,
+.proof-value,
+.proof-label,
+.featured-card-tag,
+.featured-card-stack,
+.timeline-list span,
+.project-category,
+.about-hero-btn,
+.social-tooltip,
+.featured-card-cta {
+  font-family: var(--ff-mono);
+}
 
 
 
@@ -497,7 +524,6 @@ main {
   background: var(--bg-panel-raised);
   color: var(--text-main);
   font-size: var(--fs-8);
-  font-family: var(--ff-poppins);
   white-space: nowrap;
   max-width: min(220px, 85vw);
   overflow: hidden;
@@ -2394,7 +2420,6 @@ main {
   text-decoration: none;
   white-space: nowrap;
   border: 1px solid transparent;
-  font-family: var(--ff-poppins);
   letter-spacing: 0.3px;
 }
 
