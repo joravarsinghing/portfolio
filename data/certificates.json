@@ -1,4 +1,24 @@
 [
+    {
+    "href": "./assets/images/certificates/One_Million_Prompters.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/One_Million_Prompters.jpg",
+    "imageAlt": "Dubai One Million Prompters Certificate",
+    "category": "Certificate",
+    "date": "Jun 22, 2026",
+    "title": "1 Million Prompters Certificate",
+    "description": "The Dubai One Million Prompters Certificate is a free, global initiative that trains and certifies individuals in advanced generative AI prompting to boost digital productivity"
+  },
+  {
+    "href": "./assets/images/certificates/Outskill AI Mastermind.jpg",
+    "dataTitle": "Portfolio website",
+    "imageSrc": "./assets/images/certificates/Outskill AI Mastermind.jpg",
+    "imageAlt": "Outskill AI Mastermind Certificate",
+    "category": "Certificate",
+    "date": "Apr 12, 2026",
+    "title": "Outskill AI Mastermind",
+    "description": "Comprehensive introduction to aircraft design and performance, covering aerodynamics, propulsion systems, flight mechanics, and airplane classifications"
+  },
   {
     "href": "./assets/images/certificates/Udemy Aerospace Engineering- Aircraft Fundamentals.jpg",
     "dataTitle": "Portfolio website",

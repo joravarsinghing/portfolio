@@ -85,7 +85,7 @@
   <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/letter-j.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/images/J_initial-01.svg" type="image/x-icon">
 
   <!--
     - custom css link
@@ -107,6 +107,9 @@
 
 <body>
 
+  <!-- Canvas Background Simulation -->
+  <canvas id="c"></canvas>
+
   <!--
     - #MAIN
   -->
@@ -119,72 +122,90 @@
 
     <aside class="sidebar">
 
+      <!-- Timezone Clock Telemetry -->
+      <div class="top-telemetry-bar" id="top-telemetry-bar" aria-hidden="true">
+        <span class="status-dot"></span>
+        <span class="telemetry-label">LOC::DUBAI_GST //</span>
+        <span id="telemetry-time"></span>
+      </div>
+
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img id="avatar-image" src="./assets/images/Joravar Singh Image2.jpg" alt="Joravar Singh" width="80">
+          <img id="avatar-image" src="./assets/images/Joravar Singh Image2.png" alt="Joravar Singh" width="80">
         </figure>
 
         <div class="info-content">
           <h1 class="name" title="Joravar Singh">Joravar Singh</h1>
 
           <p class="title">AI × Mechatronics<br>Systems Builder</p>
+
+          <div class="sidebar-contact-row">
+            <ul class="social-list">
+
+              <li class="social-item">
+                <a href="mailto:joravarofficial@outlook.com"
+                   class="social-link"
+                   aria-label="Email: joravarofficial@outlook.com">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  <span class="social-tooltip">joravarofficial@outlook.com</span>
+                </a>
+              </li>
+
+              <li class="social-item">
+                <a href="https://www.linkedin.com/in/joravarsingh/"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn: linkedin.com/in/joravarsingh">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                  <span class="social-tooltip">linkedin.com/in/joravarsingh</span>
+                </a>
+              </li>
+
+              <li class="social-item">
+                <a href="https://github.com/joravarsinghing"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub: github.com/joravarsinghing">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <span class="social-tooltip">github.com/joravarsinghing</span>
+                </a>
+              </li>
+
+              <li class="social-item">
+                <a href="https://scholar.google.com/citations?hl=en&user=NsgJ7nEAAAAJ"
+                   class="social-link"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Google Scholar profile">
+                  <svg class="custom-icon gs-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path class="gs-top-left" d="M256 411.12L0 202.667 256 0z" />
+                    <path class="gs-top-right" d="M256 411.12l256-208.453L256 0z" />
+                    <circle class="gs-circle" cx="256" cy="362.667" r="149.333" />
+                    <path class="gs-base" d="M121.037 298.667c23.968-50.453 75.392-85.334 134.963-85.334s110.995 34.881 134.963 85.334H121.037z" />
+                  </svg>
+                  <span class="social-tooltip">Google Scholar</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
         </div>
 
       </div>
 
-      <div class="sidebar-contact-row">
-        <ul class="social-list">
+<!-- System Status Bar -->
+<div class="system-status-bar" id="system-status-bar" aria-hidden="true">
+  <span class="status-dot"></span>
 
-          <li class="social-item">
-            <a href="mailto:joravarofficial@outlook.com"
-               class="social-link"
-               aria-label="Email: joravarofficial@outlook.com">
-              <ion-icon name="mail-outline"></ion-icon>
-              <span class="social-tooltip">joravarofficial@outlook.com</span>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/joravarsingh/"
-               class="social-link"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="LinkedIn: linkedin.com/in/joravarsingh">
-              <ion-icon name="logo-linkedin"></ion-icon>
-              <span class="social-tooltip">linkedin.com/in/joravarsingh</span>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://github.com/joravarsinghing"
-               class="social-link"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="GitHub: github.com/joravarsinghing">
-              <ion-icon name="logo-github"></ion-icon>
-              <span class="social-tooltip">github.com/joravarsinghing</span>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://scholar.google.com/citations?hl=en&user=NsgJ7nEAAAAJ"
-               class="social-link"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Google Scholar profile">
-              <svg class="custom-icon gs-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                <path class="gs-top-left" d="M256 411.12L0 202.667 256 0z" />
-                <path class="gs-top-right" d="M256 411.12l256-208.453L256 0z" />
-                <circle class="gs-circle" cx="256" cy="362.667" r="149.333" />
-                <path class="gs-base" d="M121.037 298.667c23.968-50.453 75.392-85.334 134.963-85.334s110.995 34.881 134.963 85.334H121.037z" />
-              </svg>
-              <span class="social-tooltip">Google Scholar</span>
-            </a>
-          </li>
-
-        </ul>
-      </div>
+  <span class="status-text">
+    <span class="status-location">LOC::DUBAI_GST</span>
+    <span id="telemetry-day-status"></span>
+    <span id="telemetry-time-status"></span>
+  </span>
+</div>
 
     </aside>
 
@@ -320,7 +341,7 @@
 
     <li class="featured-project-card">
       <div class="featured-card-body">
-        <span class="featured-card-tag featured-card-tag--violet">MATLAB · Energy</span>
+        <span class="featured-card-tag">MATLAB · Energy</span>
         <h4 class="featured-card-name">TriPower Energy MATLAB</h4>
         <p class="featured-card-desc">MATLAB-based energy and power system simulation.</p>
         <p class="featured-card-stack">MATLAB · Simulation · Engineering Analysis</p>
@@ -330,7 +351,7 @@
 
     <li class="featured-project-card">
       <div class="featured-card-body">
-        <span class="featured-card-tag">Robotics · Research</span>
+        <span class="featured-card-tag featured-card-tag--violet">Robotics · Research</span>
         <h4 class="featured-card-name">Autonomous Self-Driving RC Car</h4>
         <p class="featured-card-desc">Research project combining robotics, sensing, and control.</p>
         <p class="featured-card-stack">Embedded Systems · Sensors · Control Logic</p>
@@ -453,22 +474,32 @@
           - testimonials
         -->
 
-        <section class="testimonials">
+        <section class="testimonials" aria-labelledby="testimonial-feed-title">
 
-          <h3 class="h3 testimonials-title">Testimonials</h3>
+          <div class="testimonials-header">
+            <span class="testimonials-kicker">AUTH // VERIFIED_SIGNAL</span>
+            <h3 class="h3 testimonials-title" id="testimonial-feed-title">Reference Feed</h3>
+            <p class="testimonials-subtitle">External operator reports from academic, engineering, and production environments.</p>
+          </div>
 
           <ul class="testimonials-list has-scrollbar">
 
             <li class="testimonials-item"> <!-- Amit Kumar -->
-              <div class="content-card" data-testimonials-item>
+              <div class="content-card testimonial-node" data-testimonials-item>
+                <span class="testimonial-node-code">REF.NODE // 01</span>
+                <span class="testimonial-node-status">LOCKED</span>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/amit-kumar.jpg" alt="Amit Kumar" width="60" data-testimonials-avatar>
                 </figure>
 
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Amit Kumar, Ph.D.</h4>
+                <div class="testimonial-identity">
+                  <h4 class="h4 testimonials-item-title" data-testimonials-title>Amit Kumar, Ph.D.</h4>
 
-                <h2 class="testimonials-text2">MAHE, Dubai</h2>
+                  <h2 class="testimonials-text2">MAHE, Dubai</h2>
+
+                  <time datetime="2024-07-14" data-testimonials-date style="display: none;">14 July, 2024</time>
+                </div>
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
@@ -485,19 +516,27 @@
                   </p>
                 </div>
 
+                <span class="testimonial-open-label">Open Full Report</span>
+
               </div>
             </li>
 
             <li class="testimonials-item"> <!-- Mohammed Bamatraf -->
-              <div class="content-card" data-testimonials-item>
+              <div class="content-card testimonial-node" data-testimonials-item>
+                <span class="testimonial-node-code">REF.NODE // 02</span>
+                <span class="testimonial-node-status">LOCKED</span>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/m-bamatraf.jpg" alt="Mohammed Bamatraf" width="60" data-testimonials-avatar>
                 </figure>
 
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Mohammed Bamatraf</h4>
+                <div class="testimonial-identity">
+                  <h4 class="h4 testimonials-item-title" data-testimonials-title>Mohammed Bamatraf</h4>
 
-                <h2 class="testimonials-text2">MAHE, Dubai</h2>
+                  <h2 class="testimonials-text2">MAHE, Dubai</h2>
+
+                  <time datetime="2024-06-10" data-testimonials-date style="display: none;">10 June, 2024</time>
+                </div>
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
@@ -514,19 +553,27 @@
                   </p>
                 </div>
 
+                <span class="testimonial-open-label">Open Full Report</span>
+
               </div>
             </li>
 
             <li class="testimonials-item"> <!-- Rashad Gafarov -->
-              <div class="content-card" data-testimonials-item>
+              <div class="content-card testimonial-node" data-testimonials-item>
+                <span class="testimonial-node-code">REF.NODE // 03</span>
+                <span class="testimonial-node-status">LOCKED</span>
 
                 <figure class="testimonials-avatar-box">
                   <img src="./assets/images/r-gafarov.jpg" alt="Rashad Gafarov" width="60" data-testimonials-avatar>
                 </figure>
 
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Rashad Gafarov</h4>
+                <div class="testimonial-identity">
+                  <h4 class="h4 testimonials-item-title" data-testimonials-title>Rashad Gafarov</h4>
 
-                <h2 class="testimonials-text2">BritePixL</h2>
+                  <h2 class="testimonials-text2">BritePixL</h2>
+
+                  <time datetime="2024-06-19" data-testimonials-date style="display: none;">19 June, 2024</time>
+                </div>
 
                 <div class="testimonials-text" data-testimonials-text>
                   <p>
@@ -536,6 +583,8 @@
                   </p>
                 </div>
 
+                <span class="testimonial-open-label">Open Full Report</span>
+
               </div>
             </li>
 
@@ -543,6 +592,7 @@
 
         </section>
 
+      </article>
 
         <!--
           - testimonials modal
@@ -570,7 +620,7 @@
 
               <h4 class="h3 modal-title" data-modal-title>Amit Kumar</h4>
 
-              <time datetime="2021-06-14">10 June, 2024</time>
+              <time datetime="2021-06-14" data-modal-date>10 June, 2024</time>
 
               <div data-modal-text>
                 <p>
@@ -583,11 +633,6 @@
           </section>
 
         </div>
-
-
-
-
-      </article>
 
 
 
@@ -822,7 +867,7 @@
     <!-- Digital Fabrication, Product Development & Business Systems -->
     <li class="skills-item">
       <div class="title-wrapper">
-        <h5 class="h5">Digital Fabrication, Product Development &amp; Business Systems</h5>
+        <h5 class="h5">Digital Fabrication &amp; Business Systems</h5>
       </div>
 
       <div class="skill-icons" role="list" aria-label="Digital fabrication, product development, and business systems">

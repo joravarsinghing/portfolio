@@ -1,232 +1,115 @@
-# Joravar Singh Portfolio
+# 🖥️ Joravar Singh - Cyberpunk System Handoff Documentation
 
-Static personal portfolio website built with HTML, CSS, and vanilla JavaScript.
+Welcome, Operator. This document serves as the system map, specifications, and execution instructions for this terminal-style mechatronics portfolio interface. Read this before initiating any codebase writes.
 
-## Overview
+---
 
-This repository contains a single-page portfolio site with:
-- Sidebar profile and contact details
-- About and Resume sections
-- Filterable Portfolio gallery (Code, Hardware, Research, 3D Design)
-- Certificates gallery
-- Testimonials with modal popup
+## 📂 Codebase Map & Navigation
 
-The project is intentionally lightweight and suitable for static hosting.
-
-## Tech Stack
-
-- HTML5 (`index.html`)
-- CSS3 (`assets/css/style.css`)
-- Vanilla JavaScript (`assets/js/script.js`)
-- External libraries:
-  - Fancybox 3.5.7 (self-hosted in `assets/vendor/fancybox/`)
-  - Ionicons 5.5.2 (self-hosted in `assets/vendor/ionicons/`)
-  - jQuery 3.6.0 (self-hosted in `assets/vendor/jquery/`)
-  - [Google Fonts - Poppins](https://fonts.google.com/specimen/Poppins)
-
-## Local Preview
-
-No build step is required for local editing and preview.
-
-### Option 1: Open directly
-Double-click `index.html` to open it in your browser.
-
-### Option 2: Run a local static server (recommended)
-Using Python:
-
-```bash
-python -m http.server 5500
-```
-
-Then open `http://localhost:5500`.
-
-Using Node:
-
-```bash
-npx serve .
-```
-
-Then open the URL printed in the terminal.
-
-## Optimization Build Pipeline
-
-The repository now includes a lightweight optimization pipeline for production output.
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Build optimized static files:
-
-```bash
-npm run build
-```
-
-Quick build without image optimization:
-
-```bash
-npm run build:quick
-```
-
-Build output is generated in `dist/` with:
-- Minified CSS and JS
-- Content-hashed CSS/JS filenames for cache-friendly versioning
-- Minified `index.html` with rewritten asset references
-- Compressed images and generated `.webp` versions (full build)
-
-## Project Structure
+The codebase is organized as a lightweight static site utilizing JSON-driven content generation, compiled via a Node.js build pipeline.
 
 ```text
 portfolio/
-|- index.html
-|- index.txt
-|- lightbox.css
-|- implementation_plan.md
-|- assets/
-|  |- css/
-|  |  |- style.css
-|  |- js/
-|  |  |- script.js
-|  |- vendor/
-|     |- fancybox/
-|     |- ionicons/
-|     |- jquery/
-|  |- images/
-|     |- ... (profile, icons, project media, certificates)
-|- tools/
-|  |- build.mjs
-|- package.json
-|- .github/
-|  |- FUNDING.yml
+├── index.html               # Core DOM skeleton, metadata, schema markup, and HUD elements
+├── data/
+│   ├── projects.json        # Data array for all portfolio projects
+│   └── certificates.json    # Data array for all certs and awards
+├── assets/
+│   ├── css/
+│   │   └── style.css        # Core stylesheet (cyberpunk custom overrides are at the bottom)
+│   ├── js/
+│   │   └── script.js        # Interactive scripts, dynamic DOM injection, clocks, typewriter
+│   ├── images/              # Media files, thumbnails, profile picture
+│   └── vendor/              # Self-hosted Ionicons, Fancybox, and jQuery
+├── tools/
+│   └── build.mjs            # Production compiler (hashes assets, minifies files, writes to dist/)
+├── package.json             # NPM build tasks and dependencies
+└── dist/                    # Compiled and minified production build
 ```
 
-## Content Editing Guide
+---
 
-Most content is currently hardcoded in `index.html`.
+## 🛠️ Build Pipeline & Production Workflows
 
-### Update basic profile/about info
-Edit:
-- Sidebar identity and contact block in `index.html`
-- About text and services/testimonials sections in `index.html`
+Do NOT serve files directly from the root for production. Always compile and test the minified bundle:
 
-Tips:
-- Keep image paths relative (for example, `./assets/images/...`).
-- Preserve existing `class` and `data-*` attributes used by JavaScript.
+```bash
+# 1. Install dev dependencies
+npm install
 
-### Add or edit projects
-Projects are in the `Portfolio` article under:
-- `<article class="portfolio" data-page="portfolio">`
-- `<ul class="project-list">`
+# 2. Build optimized static files to /dist (Minifies DOM, hashes and version-controls CSS/JS, minifies images)
+npm run build
 
-Each project card uses this structure:
-- `li.project-item` with `data-filter-item`
-- `data-category` must match filter values used by JS (`code`, `hardware`, `research`, `3d design`)
-- `a` tag points to image/video media opened by Fancybox
-- `h3.project-title` and `p.project-category` for card text
+# 3. Quick build without image compression (Use this during iterative testing)
+npm run build:quick
+```
 
-Checklist when adding a project:
-- Add media file under `assets/images/Projects/` (or update path accordingly).
-- Use a valid category so filtering works.
-- Keep `data-fancybox="gallery"` if you want it in the gallery lightbox group.
-- Verify thumbnail path in `<img src="...">` and lightbox path in `<a href="...">`.
+> [!IMPORTANT]
+> Whenever you modify `index.html`, `style.css`, `script.js`, or the JSON files in `data/`, you **must** run `npm run build:quick` (or `npm run build`) to ensure the changes compile into the production-ready `dist/` directory.
 
-### Add or edit certificates
-Certificates are in:
-- `<article class="certificates" data-page="certificates">`
-- `<ul class="certificates-posts-list">`
+---
 
-Each certificate card includes:
-- `li.certificates-post-item`
-- `a href="...certificate image..."` with `data-fancybox="gallery"`
-- Certificate category label (`Certificate`/`Award`)
-- Date in `<time datetime="YYYY-MM-DD">Visible Date</time>`
-- Title and description text
+## 🎨 Cyberpunk Design System & Styling Tokens
 
-Checklist when adding a certificate:
-- Place image in `assets/images/certificates/`.
-- Update both `href` and inner `<img src>` paths.
-- Keep the card class names unchanged to preserve styling.
+The system utilizes high-contrast neon accents, glassmorphic paneling, scanning laser overlays, and custom geometric clip-paths.
 
-### Add or edit testimonials
-Testimonials are in the About page section:
-- `<section class="testimonials">`
-- `<ul class="testimonials-list">`
+### CSS Custom Variables (`assets/css/style.css`)
+- **Primary Accent (Neon Cyan/Blue)**: `var(--accent-primary) = #00f0ff` (used for standard status indications, hover states, and structural highlights)
+- **Secondary Accent (Neon Yellow)**: `var(--accent-secondary) = #fcee09` (used for active navigational links, labels, and primary status alerts)
+- **Green Accent (Status Green)**: `var(--accent-green) = #39ff14` (used for active blinking status indicators)
+- **Background Palette**: Dark coal theme using HSL values (e.g., `hsla(240, 15%, 9%, 1)`)
 
-Each testimonial item should keep:
-- `data-testimonials-item` on the clickable card
-- `data-testimonials-avatar` on avatar image
-- `data-testimonials-title` on name/title element
-- `data-testimonials-text` on the testimonial text block
+### Micro-Animations & Atmospheric Filters
+- **Scanline Background overlay**: A looping scanline sweep across the viewport overlaying a slow-moving grid background (`grid-move` animation).
+- **Glitch aberration keyframes**: A chromatic aberration styling animation (`subtle-glitch`) that flashes occasionally after typewriter animation finishes.
+- **Cyberpunk Badge Clip-Paths**:
+  - Small Chamfer: `clip-path: var(--cyber-clip-sm)` (cuts bottom-left/top-right corners slightly for buttons/icons).
+  - Medium Chamfer: `clip-path: var(--cyber-clip-md)`.
 
-These attributes are required by `assets/js/script.js` to populate the modal.
+---
 
-Checklist when adding a testimonial:
-- Add the person image to `assets/images/`.
-- Ensure all required `data-testimonials-*` attributes exist.
-- Click the card locally and confirm the modal shows correct avatar, name, and text.
+## ⚙️ Interactive UI Components & States
 
-## Behavior Controlled by JavaScript
+### 1. Unified Timezone Telemetry Clocks
+Locked to the developer's timezone (**GST Dubai, Asia/Dubai - UTC+4**) using the browser's native `Intl.DateTimeFormat`:
+- **Narrow Screens (< 768px)**: The clock displays inside `.sidebar` as a clean, bordered floating badge (`.top-telemetry-bar`) with a green blinking `.status-dot` next to the location tag `LOC::DUBAI_GST //`.
+- **Middle/Desktop Screens (>= 768px)**: The top clock is hidden, and the timezone clock displays inside the bottom-left system status bar (`.system-status-bar`) formatted as `LOC::DUBAI_GST | [YYYY-MM-DD | HH:MM:SS]`.
+- **Location Text**: The label `LOC::DUBAI_GST` is styled in yellow (`var(--accent-secondary)`) inside the status bar.
 
-`assets/js/script.js` handles:
-- Sidebar show/hide on mobile
-- Testimonials modal open/close
-- Portfolio category filtering
-- Navbar page switching
+### 2. Sidebar Layout Modes
+- **Narrow Screens (< 768px)**: Vertically centered header card with a "Show Contacts" toggle button.
+- **Tablet/Medium Screens (768px - 1249px)**: Formatted as a clean, horizontal **"terminal header" layout** using CSS Flexbox.
+  - Avatar on the far-left (`flex: 0 0 100px;` no shrink).
+  - Profile info (Name + Title + Social Icons) stacked vertically and left-aligned next to the avatar inside `.info-content`.
+  - The status bar sits absolutely positioned inside the right side of the sidebar card (`top: 68px; right: 30px`).
+- **Desktop Screens (>= 1250px)**: Anchored as a vertical column on the left.
+  - Sidebar top padding matches the main body (`padding-top: 75px`).
+  - The status bar is centered horizontally inside the top padding space above the profile picture (`top: 15px; left: 50%` absolute).
 
-When editing HTML, preserve matching selectors and `data-*` attributes used by JS.
+### 3. Typewriter Headline effect
+On page load, the developer's title (`AI × MECHATRONICS SYSTEMS BUILDER`) is typed out letter-by-letter, appending a blinking prompt cursor `_`. The typewriter engine skips HTML tags (`<` to `>`) instantly to prevent DOM rendering issues.
 
-## Deployment Notes
+### 4. Navigation & Highlight states
+- **Active Navigation links**: Active tabs in the navbar and portfolio filters display as bold yellow text framed by square brackets (e.g. `[ ABOUT ]` or `[ CODE ]`). Hover states highlight in neon blue/cyan.
+- **About Page CTA Buttons**:
+  - Inactive/Secondary buttons (Resume, GitHub, LinkedIn) fill to solid neon blue (`var(--accent-primary)`) on hover.
+  - Primary button (Projects) fills to solid neon yellow (`var(--accent-secondary)`) on hover.
 
-This site can be deployed to any static host.
+### 5. Resume Accordion Dropdowns
+Timeline lists (Education, Experience) function as interactive toggles. Clicking on the header transitions the list height (`max-height: 0` to `1500px`) and reveals a status indicator (`[ + ]` when collapsed, `[ - ]` when expanded).
 
-### GitHub Pages
-1. Push repository to GitHub.
-2. In repository settings, open **Pages**.
-3. Set source to your default branch (root folder).
-4. Save and wait for Pages build.
+### 6. Project/Certificate Viewer dialog
+Loads multi-asset projects dynamically without vertical cropping:
+- Media cards have `flex: 0 0 auto !important` to override flexbox vertical shrinkage.
+- Images scale to aspect ratio (`width: auto`, `max-width: 100%`) with max height bounded to `70vh` (and `65vh` for videos) to fit portrait screenshots beautifully.
+- Active navigation tabs inside the viewer rail highlight in yellow, with inactive tabs highlighting in blue on hover.
 
-### Netlify
-1. Import the GitHub repository into Netlify.
-2. Build command: leave empty.
-3. Publish directory: `/` (repo root).
-4. Deploy.
+---
 
-### Vercel
-1. Import repository.
-2. Framework preset: `Other`.
-3. Build command: none.
-4. Output directory: default/root.
-5. Deploy.
+## 🤖 Guide for Future AI Operators
 
-## Troubleshooting
-
-### Missing images or media
-- Verify file exists in `assets/images/...`.
-- Check path case sensitivity (important on Linux-based hosts).
-- Confirm there are no spaces/typos in filenames, or URL-encode spaces if needed.
-
-### Broken navigation or filtering
-- Ensure `data-page` values match navbar text in lowercase.
-- Ensure project `data-category` values exactly match filter values.
-- Keep `data-filter-item`, `data-filter-btn`, `data-select-item`, and related classes.
-
-### Broken links
-- Recheck external URLs (`https://...`) and internal relative paths (`./assets/...`).
-- For social links, verify target profile URLs are still valid.
-
-### Fancybox or icon failures
-- Verify local vendor files exist in `assets/vendor/...`.
-- Ensure static host serves `.js` and `.css` files from that directory.
-- If scripts fail to load, the gallery falls back to normal link behavior.
-
-### Console errors
-- Open browser devtools console and refresh.
-- Typical causes are missing selectors/attributes after HTML edits, or invalid media paths.
-
-## Maintenance Notes
-
-- Keep markup consistent with existing card patterns.
-- Prefer small, incremental edits and test in browser after each section update.
-- If adding many new cards, keep formatting tidy for readability and easier diffs.
+When modifying this repository, follow these guidelines:
+1. **Preserve Bracketing**: When active tabs change, retain the square bracketing system (`[ TABS ]`).
+2. **Double check JSON Data**: Do not hardcode new projects or certificates in `index.html`. Add them to `data/projects.json` or `data/certificates.json`.
+3. **Responsive Testing**: Verify that sidebar flex adjustments do not break the mobile vertical stack or desktop sticky column layouts.
+4. **Build Command**: Always run `npm run build:quick` after CSS/JS changes and verify compilation logs.
