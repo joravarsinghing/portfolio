@@ -365,7 +365,9 @@ const getProjectViewerElements = function () {
     rail: document.querySelector('[data-project-rail]'),
     title: document.querySelector('[data-project-viewer-title]'),
     category: document.querySelector('[data-project-viewer-category]'),
-    mediaList: document.querySelector('[data-project-media-list]')
+    mediaList: document.querySelector('[data-project-media-list]'),
+    externalContainer: document.querySelector('[data-project-viewer-external-container]'),
+    externalBtn: document.querySelector('[data-project-viewer-external-btn]')
   };
 };
 
@@ -527,6 +529,21 @@ setActiveProject = function (index, elements, direction) {
   const project = projectViewerState.projects[normalizedIndex];
   elements.title.textContent = project.title;
   elements.category.textContent = project.displayCategory;
+
+  // Handle external link/button
+  if (elements.externalContainer && elements.externalBtn) {
+    if (project.showExternalLink && project.externalLinkUrl) {
+      elements.externalContainer.style.display = 'flex';
+      elements.externalBtn.href = project.externalLinkUrl;
+      const btnTextSpan = elements.externalBtn.querySelector('span');
+      if (btnTextSpan) {
+        btnTextSpan.textContent = project.externalLinkText || 'View Project';
+      }
+    } else {
+      elements.externalContainer.style.display = 'none';
+    }
+  }
+
   renderProjectMediaStack(project, elements);
   syncActiveRail(elements);
 };

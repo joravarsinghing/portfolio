@@ -1,5 +1,24 @@
 [
   {
+    "id": "rad-website",
+    "category": "code",
+    "title": "RAD Website",
+    "displayCategory": "Code",
+    "dataTitle": "RAD Website",
+    "cover": "./assets/images/Projects/RAD_website.png",
+    "imageAlt": "RAD website screenshot",
+    "media": [
+      {
+        "type": "image",
+        "src": "./assets/images/Projects/RAD_website.png",
+        "title": "RAD Website"
+      }
+    ],
+    "showExternalLink": true,
+    "externalLinkUrl": "https://www.rattanartdesign.com",
+    "externalLinkText": "Website"
+  },
+  {
     "id": "selfmint-android-app",
     "category": "code",
     "title": "SelfMint - Android App",
@@ -23,7 +42,10 @@
         "src": "./assets/images/Projects/SelfMint3.png",
         "title": "SelfMint - Android App"
       }
-    ]
+    ],
+    "showExternalLink": true,
+    "externalLinkUrl": "https://github.com/joravarsinghing/SelfMint",
+    "externalLinkText": "GitHub Repository"
   },
   {
     "id": "promptbooks",
@@ -49,7 +71,10 @@
         "src": "./assets/images/Projects/PB3.png",
         "title": "PromptBooks"
       }
-    ]
+    ],
+    "showExternalLink": true,
+    "externalLinkUrl": "https://github.com/joravarsinghing/PromptBooks",
+    "externalLinkText": "GitHub Repository"
   },
   {
     "id": "autonomous-self-driving-rc-car",
@@ -65,7 +90,10 @@
         "src": "./assets/images/Projects/Autonomous%20Self-Driving%20RC%20Car.jpg",
         "title": "Autonomous Self-Driving RC Car"
       }
-    ]
+    ],
+    "showExternalLink": true,
+    "externalLinkUrl": "https://www.sciencedirect.com/science/article/pii/S1877050925013341",
+    "externalLinkText": "Science Direct"
   },
   {
     "id": "tripower-energy-matlab",
@@ -81,7 +109,10 @@
         "src": "./assets/images/Projects/TriPower Energy.png",
         "title": "TriPower Energy MATLAB"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "portfolio-website",
@@ -97,7 +128,10 @@
         "src": "./assets/images/Projects/project-1.png",
         "title": "Portfolio website"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "printing-animation",
@@ -119,7 +153,10 @@
         "src": "./assets/images/Projects/Keanu 3DP timelapse.png",
         "title": "3D Printing Animation Cover"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "creality-print-farm",
@@ -135,7 +172,10 @@
         "src": "./assets/images/Projects/project-2.jpg",
         "title": "Creality Print farm setup & Printing"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "blender-animation",
@@ -157,7 +197,10 @@
         "src": "./assets/images/Projects/blender animation.png",
         "title": "Blender Animation Cover"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "gesture-controlled-bricks-paper",
@@ -173,7 +216,10 @@
         "src": "./assets/images/Projects/Gesture Control Bricks.jpg",
         "title": "Gesture Controlled Bricks - Research Paper"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "gesture-controlled-led-wall",
@@ -189,7 +235,10 @@
         "src": "./assets/images/Projects/project-3.png",
         "title": "Gesture Controlled LED Brick Wall"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "ieee-emirates-robot-championship-2022",
@@ -205,7 +254,10 @@
         "src": "./assets/images/Projects/project-4.png",
         "title": "IEEE Emirates Robot Championship 2022"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "emirates-robotics-championship",
@@ -231,7 +283,10 @@
         "src": "./assets/images/Projects/project-51.jpg",
         "title": "Emirates Robotics Championship"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "matlab-battery-soc",
@@ -247,7 +302,10 @@
         "src": "./assets/images/Projects/project-6.png",
         "title": "MATLAB Battery SoC"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "adnoc-otg-fuel-station",
@@ -268,7 +326,10 @@
         "src": "./assets/images/Projects/project-72.png",
         "title": "Adnoc OTG Fuel Station"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "generative-design",
@@ -284,7 +345,10 @@
         "src": "./assets/images/Projects/project-8.jpg",
         "title": "Generative Design"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "vaeyu-e-21",
@@ -300,7 +364,10 @@
         "src": "./assets/images/Projects/project-9.jpg",
         "title": "Vaeyu E-21"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "carnelian-2021",
@@ -316,7 +383,10 @@
         "src": "./assets/images/Projects/Carnelian.jpg",
         "title": "Carnelian 2021"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "zyroes-2018",
@@ -332,7 +402,10 @@
         "src": "./assets/images/Projects/Zyroes.png",
         "title": "Zyroes 2018"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "hava-2017",
@@ -348,7 +421,10 @@
         "src": "./assets/images/Projects/Hava.jpg",
         "title": "Hava 2017"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "python-lane-detection",
@@ -364,7 +440,10 @@
         "src": "./assets/images/Projects/project-7.png",
         "title": "Python Lane Detection"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "f360-engine",
@@ -380,7 +459,10 @@
         "src": "./assets/images/Projects/project-10.jpg",
         "title": "F360 Engine"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   },
   {
     "id": "technical-drawing",
@@ -396,6 +478,9 @@
         "src": "./assets/images/Projects/project-11.jpg",
         "title": "Technical Drawing"
       }
-    ]
+    ],
+    "showExternalLink": false,
+    "externalLinkUrl": "",
+    "externalLinkText": ""
   }
 ]

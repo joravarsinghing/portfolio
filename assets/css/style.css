@@ -1392,6 +1392,46 @@ body.project-viewer-open {
   margin-bottom: 14px;
 }
 
+.project-viewer-external-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.project-viewer-external-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 0;
+  clip-path: var(--cyber-clip-sm);
+  font-family: var(--ff-mono);
+  font-size: var(--fs-6);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  background: var(--accent-secondary, #fcee09);
+  color: #030406;
+  border: none;
+  width: 100%;
+  max-width: 260px;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(252, 238, 9, 0.15);
+}
+
+.project-viewer-external-btn:hover {
+  background: var(--accent-primary, #00f0ff);
+  color: #030406;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+}
+
 .project-viewer-media-list {
   flex: 1 1 auto;
   min-height: 0;
