@@ -1613,7 +1613,7 @@ body.project-viewer-open {
 \*-----------------------------------*/
 
 /**
- * responsive smaller than 768px screen — mobile sidebar layout
+ * responsive smaller than 768px screen - mobile sidebar layout
  */
 
 @media (max-width: 768px) {
@@ -1714,7 +1714,7 @@ body.project-viewer-open {
 }
 
 /**
- * responsive smaller than 580px screen — sidebar icon row
+ * responsive smaller than 580px screen - sidebar icon row
  */
 
 @media (max-width: 579px) {
@@ -1734,7 +1734,7 @@ body.project-viewer-open {
     line-height: 1.25;
   }
 
-  /* testimonials — compact grid card */
+  /* testimonials - compact grid card */
 
   .testimonials-item .content-card {
     display: grid;
@@ -2836,6 +2836,141 @@ body.project-viewer-open {
 /*-----------------------------------*\
   #FEATURED PROJECTS
 \*-----------------------------------*/
+
+.about-logo-marquee {
+  margin: -4px 0 28px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.035), rgba(139, 92, 246, 0.035));
+  overflow: hidden;
+}
+
+.about-logo-marquee-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px 12px;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.about-logo-marquee-label {
+  color: var(--accent-primary);
+}
+
+.about-logo-marquee-status {
+  color: var(--text-faint);
+  text-align: right;
+}
+
+.about-logo-marquee-window {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 10px 0 16px;
+}
+
+.about-logo-marquee-window::before,
+.about-logo-marquee-window::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-logo-marquee-window::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-main), transparent);
+}
+
+.about-logo-marquee-window::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-main), transparent);
+}
+
+.about-logo-marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  width: max-content;
+  will-change: transform;
+  animation: aboutLogoMarquee 34s linear infinite;
+}
+
+.about-logo-marquee-set {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  padding-right: 12px;
+}
+
+.about-logo-chip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+  min-width: max-content;
+  padding: 9px 12px;
+  border: 1px solid var(--border-soft);
+  background: rgba(16, 20, 29, 0.82);
+  color: var(--text-muted);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-logo-chip img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.72);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.about-logo-chip:hover {
+  color: var(--text-main);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.18);
+}
+
+.about-logo-chip:hover img {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.08);
+}
+
+@keyframes aboutLogoMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-logo-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (max-width: 580px) {
+  .about-logo-marquee-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .about-logo-marquee-status {
+    text-align: left;
+  }
+}
 
 .featured-projects {
   margin-bottom: 32px;

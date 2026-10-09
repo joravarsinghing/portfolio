@@ -1,13 +1,22 @@
-[
-    {
-    "href": "./assets/images/certificates/One_Million_Prompters.jpg",
-    "dataTitle": "Portfolio website",
-    "imageSrc": "./assets/images/certificates/One_Million_Prompters.jpg",
-    "imageAlt": "Dubai One Million Prompters Certificate",
+[{
+    "href": "./assets/images/certificates/AI-Fluency-Framework-Foundations.webp",
+    "dataTitle": "AI Fluency: Framework & Foundations",
+    "imageSrc": "./assets/images/certificates/AI-Fluency-Framework-Foundations.webp",
+    "imageAlt": "AI Fluency: Framework & Foundations certificate",
     "category": "Certificate",
-    "date": "Jun 22, 2026",
-    "title": "1 Million Prompters Certificate",
-    "description": "The Dubai One Million Prompters Certificate is a free, global initiative that trains and certifies individuals in advanced generative AI prompting to boost digital productivity"
+    "date": "Sep 11, 2026",
+    "title": "AI Fluency: Framework & Foundations",
+    "description": "Certificate of completion for AI Fluency: Framework & Foundations, issued by Anthropic."
+  },
+  {
+    "href": "./assets/images/certificates/Claude-Code-101.webp",
+    "dataTitle": "Claude Code 101",
+    "imageSrc": "./assets/images/certificates/Claude-Code-101.webp",
+    "imageAlt": "Claude Code 101 certificate",
+    "category": "Certificate",
+    "date": "Sep 24, 2026",
+    "title": "Claude Code 101",
+    "description": "Certificate of completion for Claude Code 101, issued by Anthropic."
   },
   {
     "href": "./assets/images/certificates/Outskill AI Mastermind.jpg",

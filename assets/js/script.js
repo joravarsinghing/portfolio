@@ -289,8 +289,13 @@ const setupTestimonialsModal = function () {
       
       const dateEl = this.querySelector('[data-testimonials-date]');
       if (dateEl && modalDate) {
+        const dateText = dateEl.innerHTML.trim();
         modalDate.setAttribute('datetime', dateEl.getAttribute('datetime') || '');
-        modalDate.innerHTML = dateEl.innerHTML;
+        modalDate.innerHTML = dateText;
+        modalDate.style.display = dateText ? '' : 'none';
+      } else if (modalDate) {
+        modalDate.innerHTML = '';
+        modalDate.style.display = 'none';
       }
       
       const fullTextHTML = this.querySelector('[data-testimonials-text]').innerHTML;
