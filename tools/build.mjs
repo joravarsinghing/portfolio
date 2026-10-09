@@ -62,7 +62,7 @@ const getFilesRecursively = async (directoryPath) => {
 };
 
 const minifyCssAsset = async () => {
-  const cssPath = path.join(distDir, 'assets', 'css', 'site.css');
+  const cssPath = path.join(distDir, 'assets', 'css', 'style.css');
   const cssOutputDir = path.dirname(cssPath);
   const originalCss = await fs.readFile(cssPath, 'utf8');
   const minifiedCss = new CleanCSS().minify(originalCss);
@@ -82,7 +82,7 @@ const minifyCssAsset = async () => {
 };
 
 const minifyJsAsset = async () => {
-  const jsPath = path.join(distDir, 'assets', 'js', 'site.js');
+  const jsPath = path.join(distDir, 'assets', 'js', 'script.js');
   const jsOutputDir = path.dirname(jsPath);
   const originalJs = await fs.readFile(jsPath, 'utf8');
   const minifiedJs = await minifyJs(originalJs, {
@@ -140,8 +140,8 @@ const rewriteAndMinifyHtml = async (cssAssetPath, jsAssetPath) => {
   const html = await fs.readFile(htmlPath, 'utf8');
 
   const rewrittenHtml = html
-    .replace('./assets/css/site.css', cssAssetPath)
-    .replace('./assets/js/site.js', jsAssetPath);
+    .replace('./assets/css/style.css', cssAssetPath)
+    .replace('./assets/js/script.js', jsAssetPath);
 
   const minifiedHtml = await minifyHtml(rewrittenHtml, {
     collapseWhitespace: true,
